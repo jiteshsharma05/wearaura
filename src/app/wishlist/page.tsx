@@ -44,7 +44,7 @@ export default function WishlistPage() {
             if (error) {
                 toast.error("Failed to fetch wishlist");
             } else {
-                setItems(data as any || []);
+                setItems((data as unknown as WishlistItem[]) || []);
             }
             setLoading(false);
         };
@@ -90,7 +90,7 @@ export default function WishlistPage() {
             <div className="container mx-auto max-w-7xl">
                 <div className="mb-12">
                     <h1 className="text-4xl font-light text-zinc-900 dark:text-zinc-100 tracking-tight mb-3">Your Wishlist</h1>
-                    <p className="text-zinc-500 dark:text-zinc-400">Products you've saved for later.</p>
+                    <p className="text-zinc-500 dark:text-zinc-400">Products you&apos;ve saved for later.</p>
                 </div>
 
                 {items.length === 0 ? (

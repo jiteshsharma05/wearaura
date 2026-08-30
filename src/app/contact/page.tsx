@@ -29,7 +29,7 @@ export default function ContactPage() {
                         Get in Touch
                     </h1>
                     <p className="text-lg text-[#8a8a8a] font-light max-w-xl mx-auto">
-                        Have a question or a fragrance enquiry? We'd love to hear from you.
+                        Have a question or a fragrance enquiry? We&apos;d love to hear from you.
                     </p>
                 </div>
             </section>
@@ -61,7 +61,7 @@ export default function ContactPage() {
                 <div className="bg-white border border-[#e8e6e1] rounded-[4px] p-8 shadow-sm">
                     <h2 className="text-xl font-serif text-[#1a1a1a] mb-2 tracking-wide">Send a Message</h2>
                     <p className="text-sm text-[#8a8a8a] font-light mb-8">
-                        Fill in the details below and click "Send Email" — your default email app will open with everything pre-filled.
+                        Fill in the details below and click &quot;Send Email&quot; — your default email app will open with everything pre-filled.
                     </p>
 
                     <form onSubmit={handleEmailRedirect} className="space-y-6">
@@ -121,7 +121,7 @@ export default function ContactPage() {
                     </form>
 
                     <p className="text-xs text-center text-[#8a8a8a] mt-6 font-light">
-                        Clicking "Send Email" will open your email client. You'll be emailing{" "}
+                        Clicking &quot;Send Email&quot; will open your email client. You&apos;ll be emailing{" "}
                         <span className="font-medium text-[#4a4a4a]">{recipientEmail}</span>
                     </p>
                 </div>

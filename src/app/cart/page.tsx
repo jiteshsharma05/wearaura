@@ -5,14 +5,14 @@ import { useAuth } from "@/components/AuthProvider";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "../../../lib/supabase";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import Script from "next/script";
 
 // Extend window to include Razorpay
 declare global {
     interface Window {
-        Razorpay: any;
+        Razorpay: new (...args: unknown[]) => { open(): void; on(event: string, cb: (r: { error?: { description?: string } }) => void): void };
     }
 }
 
@@ -38,7 +38,6 @@ export default function CartPage() {
     const [pincode, setPincode] = useState("");
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
     // --- Validate delivery fields ---
     const validateDeliveryFields = (): boolean => {
@@ -72,18 +71,21 @@ export default function CartPage() {
         try {
             setIsCheckingOut(true);
 
-            // 0. Verify Serviceable Location
-            const { data: locationData, error: locationError } = await supabase
-                .from("serviceable_locations")
-                .select("pincode")
-                .eq("pincode", pincode)
-                .single();
-
-            if (locationError || !locationData) {
-                toast.error("Sorry, we currently do not deliver to this location.");
-                setIsCheckingOut(false);
-                return;
-            }
+            // TODO: RE-ENABLE serviceable_locations check before going live!
+            // The serviceable_locations table needs to be populated with valid pincodes.
+            // Uncomment the block below and remove the bypass when ready for production.
+            //
+            // const { data: locationData, error: locationError } = await supabase
+            //     .from("serviceable_locations")
+            //     .select("pincode")
+            //     .eq("pincode", pincode)
+            //     .single();
+            //
+            // if (locationError || !locationData) {
+            //     toast.error("Sorry, we currently do not deliver to this location.");
+            //     setIsCheckingOut(false);
+            //     return;
+            // }
 
             // 1. Pre-check stock
             const { data: currentProducts, error: stockCheckError } = await supabase
@@ -146,9 +148,9 @@ export default function CartPage() {
             clearCart();
             router.push(`/order-success?orderId=${orderData.id}&method=cod`);
 
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error("COD Checkout Failed:", error);
-            toast.error(error?.message || "Checkout failed. Please try again.");
+            toast.error(error instanceof Error ? error.message : "Checkout failed. Please try again.");
             setIsCheckingOut(false);
         }
     };
@@ -261,9 +263,9 @@ export default function CartPage() {
                         router.push(
                             `/order-success?orderId=${createOrderData.order_id}&method=online&paymentId=${response.razorpay_payment_id}`
                         );
-                    } catch (verifyError: any) {
+                    } catch (verifyError: unknown) {
                         console.error("Payment verification failed:", verifyError);
-                        toast.error(verifyError?.message || "Payment verification failed. Contact support if amount was debited.");
+                        toast.error(verifyError instanceof Error ? verifyError.message : "Payment verification failed. Contact support if amount was debited.");
                         setIsCheckingOut(false);
                     }
                 },
@@ -276,16 +278,16 @@ export default function CartPage() {
             };
 
             const razorpay = new window.Razorpay(options);
-            razorpay.on("payment.failed", (response: any) => {
+            razorpay.on("payment.failed", (response: { error?: { description?: string } }) => {
                 console.error("Payment failed:", response.error);
                 toast.error(response.error?.description || "Payment failed. Please try again.");
                 setIsCheckingOut(false);
             });
             razorpay.open();
 
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error("Online Checkout Failed:", error);
-            toast.error(error?.message || "Checkout failed. Please try again.");
+            toast.error(error instanceof Error ? error.message : "Checkout failed. Please try again.");
             setIsCheckingOut(false);
         }
     };
@@ -320,7 +322,8 @@ export default function CartPage() {
             <Script
                 src="https://checkout.razorpay.com/v1/checkout.js"
                 onLoad={() => setRazorpayLoaded(true)}
-                strategy="lazyOnload"
+                onError={() => console.error('Failed to load Razorpay Checkout.js')}
+                strategy="afterInteractive"
             />
 
             <main className="container mx-auto px-4 py-12 max-w-6xl">
@@ -334,7 +337,7 @@ export default function CartPage() {
                                     <li key={item.id} className="p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
                                         {/* Item Image */}
                                         <div className="w-24 h-24 flex-shrink-0 rounded-md overflow-hidden bg-gray-100 mb-4 sm:mb-0">
-                                            {item.images && item.images.length > 0 ? item.images[0] : item.image_url ? (
+                                            {(item.images && item.images.length > 0) || item.image_url ? (
                                                 <img
                                                     src={(item.images && item.images.length > 0) ? item.images[0] : (item.image_url || "")}
                                                     alt={item.name}

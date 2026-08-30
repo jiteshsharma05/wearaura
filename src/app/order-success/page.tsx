@@ -1,94 +1,122 @@
-import Link from "next/link";
+"use client";
 
-export default async function OrderSuccessPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
-    const sp = await searchParams;
-    const orderId = sp?.orderId as string;
-    const method = sp?.method as string; // 'online' or 'cod'
-    const paymentId = sp?.paymentId as string;
+import { Suspense } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { CheckCircle2, Package, Mail, Sparkles } from "lucide-react";
+
+function OrderSuccessContent() {
+    const searchParams = useSearchParams();
+    const orderId = searchParams.get("orderId") || "";
+    const method = searchParams.get("method") || ""; // 'online' or 'cod'
+    const paymentId = searchParams.get("paymentId") || "";
 
     const isOnline = method === "online";
     const isCOD = method === "cod";
 
     return (
-        <main className="container mx-auto px-4 py-24 flex justify-center items-center min-h-[70vh]">
-            <div className="w-full max-w-lg bg-white p-10 rounded-3xl shadow-sm border text-center">
-                <div className={`w-20 h-20 ${isOnline ? 'bg-green-100 text-green-600' : 'bg-blue-100 text-blue-600'} rounded-full flex items-center justify-center mx-auto mb-6`}>
-                    {isOnline ? (
-                        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                    ) : (
-                        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                    )}
-                </div>
-
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                    {isOnline ? 'Payment Successful!' : 'Order Placed!'}
-                </h1>
-
-                {orderId && (
-                    <div className="mb-4">
-                        <span className="text-sm text-gray-500 font-medium">Order ID: </span>
-                        <span className="text-sm font-semibold tracking-wide text-gray-900 bg-gray-100 px-3 py-1 rounded-full">{orderId}</span>
-                    </div>
-                )}
-
-                {/* Payment method badge */}
-                <div className="mb-6">
-                    {isOnline ? (
-                        <span className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full bg-green-50 text-green-700 border border-green-200">
-                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            Paid Online
-                        </span>
-                    ) : isCOD ? (
-                        <span className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
-                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" strokeWidth={2}/><path strokeLinecap="round" strokeWidth={2} d="M12 8v4M9 12h6" /></svg>
-                            Cash on Delivery
-                        </span>
-                    ) : null}
-                </div>
-
-                {paymentId && (
-                    <div className="mb-6">
-                        <span className="text-xs text-gray-400 font-medium">Payment ID: </span>
-                        <span className="text-xs font-mono text-gray-600 bg-gray-50 px-2 py-0.5 rounded">{paymentId}</span>
-                    </div>
-                )}
-
-                <p className="text-gray-500 mb-8 text-lg">
-                    {isOnline
-                        ? 'Thank you for your purchase. Your payment has been verified and your order is being processed.'
-                        : 'Thank you for your order. Please keep the exact amount ready for delivery.'
-                    }
-                </p>
-
-                <div className="bg-gray-50 rounded-xl p-6 mb-8 text-left">
-                    <p className="text-sm text-gray-500 mb-1">What&apos;s next?</p>
-                    <ul className="list-disc list-inside text-sm text-gray-700 space-y-2">
-                        <li>You will receive an email confirmation.</li>
-                        <li>We will notify you when your order ships.</li>
-                        <li>Your order tracking link will be provided.</li>
-                        {isCOD && <li>Payment will be collected at the time of delivery.</li>}
-                    </ul>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-3">
-                    <Link
-                        href="/my-orders"
-                        className="flex-1 inline-block bg-gray-100 text-gray-900 py-4 rounded-xl font-semibold text-lg hover:bg-gray-200 transition-colors text-center"
-                    >
-                        View Orders
-                    </Link>
-                    <Link
-                        href="/"
-                        className="flex-1 inline-block bg-black text-white py-4 rounded-xl font-semibold text-lg hover:bg-gray-800 transition-colors focus:ring-4 focus:ring-gray-200 text-center"
-                    >
-                        Continue Shopping
-                    </Link>
-                </div>
+        <div className="w-full max-w-lg bg-white p-8 sm:p-10 rounded-[12px] shadow-sm border border-[#e8e6e1] text-center">
+            {/* Brand Title */}
+            <div className="mb-6">
+                <p className="font-serif text-2xl tracking-wider text-[#1a1a1a]">WearAura</p>
+                <p className="text-[10px] uppercase tracking-[0.25em] text-[#8a8a8a] mt-0.5">Luxury Fragrances</p>
             </div>
+
+            <div className={`w-16 h-16 ${isOnline ? 'bg-emerald-50 text-emerald-600' : 'bg-[#f4f2ed] text-[#1a1a1a]'} rounded-full flex items-center justify-center mx-auto mb-5 border border-[#e8e6e1]`}>
+                <CheckCircle2 className="w-8 h-8" />
+            </div>
+
+            <h1 className="text-2xl font-serif text-[#1a1a1a] mb-2">
+                {isOnline ? 'Order & Payment Confirmed!' : 'Order Placed Successfully!'}
+            </h1>
+
+            {orderId && (
+                <div className="mb-4 inline-flex items-center gap-2 bg-[#FAF9F6] border border-[#e8e6e1] px-3.5 py-1.5 rounded-full text-xs">
+                    <span className="text-[#8a8a8a] font-medium">Order ID:</span>
+                    <span className="font-mono font-semibold text-[#1a1a1a]">{orderId}</span>
+                </div>
+            )}
+
+            {/* Payment method badge */}
+            <div className="mb-6 flex justify-center">
+                {isOnline ? (
+                    <span className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <Sparkles className="w-3.5 h-3.5" />
+                        Paid Online & Verified
+                    </span>
+                ) : isCOD ? (
+                    <span className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
+                        <Package className="w-3.5 h-3.5" />
+                        Cash on Delivery
+                    </span>
+                ) : null}
+            </div>
+
+            {paymentId && (
+                <div className="mb-6 text-xs text-[#8a8a8a]">
+                    Payment Reference: <span className="font-mono text-[#1a1a1a]">{paymentId}</span>
+                </div>
+            )}
+
+            <p className="text-[#6a6a6a] mb-6 text-sm leading-relaxed">
+                {isOnline
+                    ? 'Thank you for choosing WearAura Fragrances. Your payment is verified and your handcrafted fragrance parcel is being prepared.'
+                    : 'Thank you for choosing WearAura Fragrances. Your order is registered. Please keep the exact amount ready for courier delivery.'}
+            </p>
+
+            {/* Notification guidance box */}
+            <div className="bg-[#FAF9F6] border border-[#e8e6e1] rounded-[8px] p-5 mb-8 text-left space-y-3">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#1a1a1a]">
+                    <Mail className="w-4 h-4 text-[#8a8a8a]" />
+                    WearAura Notification & Updates
+                </div>
+                <ul className="text-xs text-[#555555] space-y-2 list-disc list-inside">
+                    <li>
+                        An order confirmation has been logged under your <strong>WearAura Fragrance</strong> account.
+                    </li>
+                    <li>
+                        Our team carefully inspects and packages every perfume bottle to ensure premium arrival.
+                    </li>
+                    <li>
+                        Real-time tracking updates will be available under <strong>My Orders</strong>.
+                    </li>
+                    {isCOD && (
+                        <li className="font-medium text-[#1a1a1a]">
+                            Cash/UPI payment will be collected by the delivery agent at your doorstep.
+                        </li>
+                    )}
+                </ul>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                    href="/my-orders"
+                    className="flex-1 py-3 px-4 rounded-[6px] border border-[#1a1a1a] text-[#1a1a1a] text-xs font-semibold uppercase tracking-wider hover:bg-[#1a1a1a] hover:text-white transition-all text-center"
+                >
+                    View My Orders
+                </Link>
+                <Link
+                    href="/"
+                    className="flex-1 py-3 px-4 rounded-[6px] bg-[#1a1a1a] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#333] transition-all text-center shadow-xs"
+                >
+                    Continue Exploring
+                </Link>
+            </div>
+        </div>
+    );
+}
+
+export default function OrderSuccessPage() {
+    return (
+        <main className="min-h-screen bg-[#FAF9F6] flex justify-center items-center px-4 py-16 font-sans text-[#1a1a1a]">
+            <Suspense fallback={
+                <div className="w-full max-w-lg bg-white p-12 rounded-[12px] shadow-sm border border-[#e8e6e1] text-center">
+                    <div className="animate-spin w-8 h-8 border-2 border-[#1a1a1a] border-t-transparent rounded-full mx-auto mb-4" />
+                    <p className="text-xs uppercase tracking-widest text-[#8a8a8a]">Loading confirmation...</p>
+                </div>
+            }>
+                <OrderSuccessContent />
+            </Suspense>
         </main>
     );
 }

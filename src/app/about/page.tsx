@@ -29,7 +29,7 @@ export default function AboutPage() {
 
                 {/* Intro */}
                 <p className="text-lg text-[#4a4a4a] leading-relaxed mb-12 font-light text-center max-w-2xl mx-auto">
-                    Fragrance is the most intimate form of self-expression. A scent doesn't just surround you — it becomes you. It is your aura, made tangible, leaving a trace of who you are in every room you enter.
+                    Fragrance is the most intimate form of self-expression. A scent doesn&apos;t just surround you — it becomes you. It is your aura, made tangible, leaving a trace of who you are in every room you enter.
                 </p>
 
                 {/* Philosophy & Craftsmanship */}
@@ -74,7 +74,7 @@ export default function AboutPage() {
                 <div className="my-16 space-y-4">
                     <h2 className="text-2xl font-serif text-[#1a1a1a] tracking-tight">Refined &amp; Responsible</h2>
                     <p className="text-[#4a4a4a] font-light leading-relaxed">
-                        Luxury shouldn't cost the earth. All WearAura packaging is 100% recyclable, and every fragrance is crafted without animal testing. Our ingredients are ethically sourced from sustainable suppliers who share our commitment to quality and care.
+                        Luxury shouldn&apos;t cost the earth. All WearAura packaging is 100% recyclable, and every fragrance is crafted without animal testing. Our ingredients are ethically sourced from sustainable suppliers who share our commitment to quality and care.
                     </p>
                 </div>
 

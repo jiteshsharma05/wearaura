@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../components/AuthProvider";
 import { supabase } from "../../../lib/supabase";
-import Link from "next/link";
 import { Package, Search, ChevronDown, ShoppingBag } from "lucide-react";
 
 interface OrderProduct {
@@ -32,14 +31,6 @@ interface Order {
     created_at: string;
     order_items: OrderItem[];
 }
-
-const statusSteps = [
-    { key: 'pending', label: 'Order Placed' },
-    { key: 'paid', label: 'Payment Confirmed' },
-    { key: 'processing', label: 'Processing' },
-    { key: 'shipped', label: 'Shipped' },
-    { key: 'delivered', label: 'Delivered' }
-];
 
 export default function MyOrdersPage() {
     const { user, loading } = useAuth();
@@ -159,10 +150,10 @@ export default function MyOrdersPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#FAF9F6] pt-[64px] md:pt-[96px] pb-[64px] md:pb-[96px] font-sans text-[#1a1a1a]">
+        <div className="min-h-screen bg-[#FAF9F6] pt-[72px] md:pt-[96px] pb-[64px] md:pb-[96px] font-sans text-[#1a1a1a]">
             
             {/* PAGE HEADER */}
-            <div className="bg-[#FAF9F6] border-b border-[#e8e6e1] pb-6 px-4 sm:px-6 lg:px-8 mb-8 sticky top-[64px] md:top-[80px] z-40 bg-opacity-95 backdrop-blur-sm">
+            <div className="bg-[#FAF9F6] border-b border-[#e8e6e1] pb-6 px-4 sm:px-6 lg:px-8 mb-8 sticky top-[72px] md:top-[80px] z-40 bg-opacity-95 backdrop-blur-sm">
                 <div className="max-w-4xl mx-auto">
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 pt-8">
                         <h1 className="text-4xl md:text-5xl font-serif text-[#1a1a1a] tracking-tight">
@@ -224,7 +215,7 @@ export default function MyOrdersPage() {
                                             ].map((option) => (
                                                 <button
                                                     key={option.id}
-                                                    onClick={() => { setSortBy(option.id as any); setIsSortDropdownOpen(false); }}
+                                                    onClick={() => { setSortBy(option.id as 'date_desc' | 'date_asc' | 'total_desc' | 'total_asc'); setIsSortDropdownOpen(false); }}
                                                     className={`block w-full text-left px-4 py-2 text-sm ${sortBy === option.id ? 'bg-[#f0eeea] text-[#1a1a1a] font-medium' : 'text-[#4a4a4a] hover:bg-[#FAF9F6]'} transition-colors`}
                                                     role="menuitem"
                                                 >
