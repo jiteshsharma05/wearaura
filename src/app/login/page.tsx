@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../../../lib/supabase";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff, CheckCircle2, Mail, Lock, KeyRound, ArrowRight, RefreshCw } from "lucide-react";
+import { Eye, EyeOff, CheckCircle2, Mail, Lock, KeyRound, ArrowRight, RefreshCw, Sparkles } from "lucide-react";
 import toast from "react-hot-toast";
 
 type AuthMode = "password" | "otp";
@@ -84,7 +84,7 @@ export default function LoginPage() {
             const { error: otpError } = await supabase.auth.signInWithOtp({
                 email: email.trim(),
                 options: {
-                    shouldCreateUser: true, // Allows seamless login or signup via OTP
+                    shouldCreateUser: true,
                 },
             });
 
@@ -106,8 +106,8 @@ export default function LoginPage() {
     // Handle Verify OTP
     const handleVerifyOtp = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!otpCode.trim() || otpCode.trim().length < 6) {
-            setError("Please enter the 6-digit code sent to your email");
+        if (!otpCode.trim()) {
+            setError("Please enter the 6-digit code");
             return;
         }
 
@@ -125,9 +125,9 @@ export default function LoginPage() {
                 setError(verifyError.message);
                 toast.error(verifyError.message);
             } else {
-                setSuccessMessage("Code verified! Signing you in...");
+                setSuccessMessage("Verification successful! Welcome to WearAura.");
                 setSuccess(true);
-                toast.success("Welcome to WearAura Fragrance");
+                toast.success("Signed in successfully");
                 setTimeout(() => {
                     router.push("/");
                     router.refresh();
@@ -140,30 +140,62 @@ export default function LoginPage() {
         }
     };
 
+    // Handle Google OAuth Login
+    const handleGoogleLogin = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const redirectTo = typeof window !== "undefined" ? `${window.location.origin}/` : undefined;
+            const { error: googleError } = await supabase.auth.signInWithOAuth({
+                provider: "google",
+                options: {
+                    redirectTo,
+                },
+            });
+            if (googleError) {
+                setError(googleError.message);
+                toast.error(googleError.message);
+                setLoading(false);
+            }
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : "Failed to initiate Google sign in");
+            setLoading(false);
+        }
+    };
+
     return (
-        <main className="min-h-screen bg-[#FAF9F6] flex items-center justify-center px-4 py-16 font-sans text-[#1a1a1a]">
-            <div className="w-full max-w-[440px]">
-                {/* Brand Logo & Name */}
-                <div className="text-center mb-8">
-                    <Link href="/" className="inline-block font-serif text-[32px] text-[#1a1a1a] tracking-wider">
-                        WearAura
+        <main className="min-h-screen bg-[#131315] text-[#e5e1e4] flex items-center justify-center py-24 px-6 relative overflow-hidden">
+            {/* Ambient Background Glow */}
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-radial from-[#e8c17b]/10 to-transparent blur-3xl pointer-events-none" />
+
+            <div className="w-full max-w-md relative z-10">
+                {/* Brand Header */}
+                <div className="text-center mb-8 space-y-2">
+                    <Link href="/" className="inline-block group">
+                        <span className="text-xs uppercase tracking-[0.3em] text-[#e8c17b] font-medium block">
+                            Haute Parfumerie
+                        </span>
+                        <h1 className="text-3xl sm:text-4xl font-serif text-[#e5e1e4] tracking-wide mt-1">
+                            WearAura
+                        </h1>
                     </Link>
-                    <p className="text-xs uppercase tracking-[0.25em] text-[#8a8a8a] mt-1 font-sans">
-                        Luxury Fragrances
+                    <p className="text-xs text-[#d1c5b4]/80 tracking-widest uppercase">
+                        Client Boutique Portal
                     </p>
                 </div>
 
-                <div className="bg-white border border-[#e8e6e1] rounded-[12px] shadow-sm overflow-hidden">
-                    {/* Header Tabs */}
+                {/* Main Glass Card */}
+                <div className="glass-card rounded-2xl overflow-hidden border border-[#9a8f80]/15 shadow-2xl">
+                    {/* Mode Switch Tabs */}
                     {!success && (
-                        <div className="flex border-b border-[#e8e6e1] bg-[#faf9f6]">
+                        <div className="flex border-b border-[#9a8f80]/15 bg-[#0e0e10]/60">
                             <button
                                 type="button"
                                 onClick={() => { setMode("password"); setError(null); }}
-                                className={`flex-1 py-3.5 text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all ${
+                                className={`flex-1 py-4 text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all ${
                                     mode === "password"
-                                        ? "bg-white text-[#1a1a1a] border-b-2 border-[#1a1a1a] shadow-sm"
-                                        : "text-[#8a8a8a] hover:text-[#1a1a1a]"
+                                        ? "bg-[#201f21] text-[#e8c17b] border-b-2 border-[#e8c17b]"
+                                        : "text-[#d1c5b4]/60 hover:text-[#e5e1e4]"
                                 }`}
                             >
                                 <Lock className="w-3.5 h-3.5" />
@@ -172,228 +204,231 @@ export default function LoginPage() {
                             <button
                                 type="button"
                                 onClick={() => { setMode("otp"); setError(null); }}
-                                className={`flex-1 py-3.5 text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all ${
+                                className={`flex-1 py-4 text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all ${
                                     mode === "otp"
-                                        ? "bg-white text-[#1a1a1a] border-b-2 border-[#1a1a1a] shadow-sm"
-                                        : "text-[#8a8a8a] hover:text-[#1a1a1a]"
+                                        ? "bg-[#201f21] text-[#e8c17b] border-b-2 border-[#e8c17b]"
+                                        : "text-[#d1c5b4]/60 hover:text-[#e5e1e4]"
                                 }`}
                             >
                                 <KeyRound className="w-3.5 h-3.5" />
-                                Sign in with OTP
+                                OTP / Magic Link
                             </button>
                         </div>
                     )}
 
-                    <div className="p-7 sm:p-8">
+                    <div className="p-8">
                         {success ? (
                             <div className="flex flex-col items-center py-8 text-center gap-4 animate-in fade-in">
-                                <div className="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mb-1">
-                                    <CheckCircle2 className="w-10 h-10 text-green-600" />
+                                <div className="w-16 h-16 bg-[#003731]/40 text-[#3cddc7] border border-[#3cddc7]/30 rounded-full flex items-center justify-center mb-1">
+                                    <CheckCircle2 className="w-8 h-8" />
                                 </div>
                                 <div>
-                                    <p className="text-xl font-serif text-[#1a1a1a] mb-1">{successMessage}</p>
-                                    <p className="text-sm text-[#8a8a8a]">Redirecting to your boutique…</p>
+                                    <p className="text-2xl font-serif text-[#e5e1e4] mb-2">{successMessage}</p>
+                                    <p className="text-xs text-[#d1c5b4]/70 tracking-widest uppercase">Entering your sanctuary…</p>
                                 </div>
                             </div>
-                        ) : mode === "password" ? (
-                            /* --- PASSWORD LOGIN FORM --- */
-                            <form onSubmit={handlePasswordLogin} className="space-y-5">
+                        ) : (
+                            <div className="space-y-6">
+                                {/* Google Sign-In Button */}
                                 <div>
-                                    <p className="text-xl font-serif text-[#1a1a1a] mb-1">Sign in</p>
-                                    <p className="text-xs text-[#8a8a8a]">Enter your email and password to access your account</p>
-                                </div>
-
-                                {error && (
-                                    <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-[6px] text-xs font-medium">
-                                        {error}
-                                    </div>
-                                )}
-
-                                <div>
-                                    <label className="block text-xs font-semibold text-[#4a4a4a] uppercase tracking-wider mb-1.5" htmlFor="login-email">
-                                        Email Address
-                                    </label>
-                                    <div className="relative">
-                                        <input
-                                            id="login-email"
-                                            type="email"
-                                            value={email}
-                                            onChange={(e) => { setEmail(e.target.value); setError(null); }}
-                                            required
-                                            placeholder="you@example.com"
-                                            className="w-full border border-[#e8e6e1] rounded-[6px] px-3.5 py-3 text-sm text-[#1a1a1a] placeholder-[#b5b2ac] focus:outline-none focus:ring-1 focus:ring-[#1a1a1a] focus:border-[#1a1a1a] transition"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <div className="flex justify-between items-center mb-1.5">
-                                        <label className="text-xs font-semibold text-[#4a4a4a] uppercase tracking-wider" htmlFor="login-password">
-                                            Password
-                                        </label>
-                                        <Link href="/forgot-password" className="text-xs text-[#8a8a8a] hover:text-[#1a1a1a] transition-colors underline-offset-2 hover:underline">
-                                            Forgot password?
-                                        </Link>
-                                    </div>
-                                    <div className="relative">
-                                        <input
-                                            id="login-password"
-                                            type={showPassword ? "text" : "password"}
-                                            value={password}
-                                            onChange={(e) => { setPassword(e.target.value); setError(null); }}
-                                            required
-                                            placeholder="••••••••"
-                                            className="w-full border border-[#e8e6e1] rounded-[6px] px-3.5 py-3 pr-10 text-sm text-[#1a1a1a] placeholder-[#b5b2ac] focus:outline-none focus:ring-1 focus:ring-[#1a1a1a] focus:border-[#1a1a1a] transition"
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() => setShowPassword((v) => !v)}
-                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-[#8a8a8a] hover:text-[#1a1a1a] p-1"
-                                            aria-label={showPassword ? "Hide password" : "Show password"}
-                                        >
-                                            {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    disabled={loading}
-                                    className="w-full py-3.5 rounded-[6px] bg-[#1a1a1a] text-white text-sm font-medium hover:bg-[#333] disabled:bg-[#a0a0a0] disabled:cursor-not-allowed transition-all shadow-sm active:scale-[0.99]"
-                                >
-                                    {loading ? "Signing in…" : "Sign In with Password"}
-                                </button>
-
-                                <div className="pt-2">
                                     <button
                                         type="button"
-                                        onClick={() => { setMode("otp"); setError(null); }}
-                                        className="w-full text-center text-xs text-[#6a6a6a] hover:text-[#1a1a1a] py-2 border border-dashed border-[#dcd8d0] rounded-[6px] hover:bg-[#faf9f6] transition-colors"
+                                        onClick={handleGoogleLogin}
+                                        disabled={loading}
+                                        className="w-full flex items-center justify-center gap-3 py-3.5 px-4 rounded-xl border border-[#9a8f80]/20 bg-[#201f21]/80 hover:bg-[#2a2a2c] hover:border-[#e8c17b]/40 text-[#e5e1e4] text-xs uppercase tracking-wider font-semibold transition-all shadow-sm active:scale-[0.99] disabled:opacity-50 cursor-pointer"
                                     >
-                                        Forgot password? <span className="font-semibold text-[#1a1a1a] underline">Sign in instantly with OTP</span>
+                                        <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24">
+                                            <path
+                                                fill="#4285F4"
+                                                d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
+                                            />
+                                            <path
+                                                fill="#34A853"
+                                                d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.35 24 12 24z"
+                                            />
+                                            <path
+                                                fill="#FBBC05"
+                                                d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.98 0 12s.45 3.82 1.25 5.42l4.03-3.15z"
+                                            />
+                                            <path
+                                                fill="#EA4335"
+                                                d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
+                                            />
+                                        </svg>
+                                        <span>Continue with Google</span>
                                     </button>
                                 </div>
-                            </form>
-                        ) : (
-                            /* --- OTP LOGIN / SIGNUP FORM --- */
-                            <div className="space-y-5">
-                                <div>
-                                    <p className="text-xl font-serif text-[#1a1a1a] mb-1">
-                                        {!otpSent ? "One-Time Password Login" : "Enter Verification Code"}
-                                    </p>
-                                    <p className="text-xs text-[#8a8a8a]">
-                                        {!otpSent
-                                            ? "We'll send a 6-digit code from WearAura Fragrance directly to your email."
-                                            : `A 6-digit code has been sent to ${email}. Check your inbox or spam.`}
-                                    </p>
+
+                                <div className="relative flex items-center justify-center my-4">
+                                    <div className="border-t border-[#9a8f80]/15 w-full" />
+                                    <span className="bg-[#16151A] px-3 text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest absolute">
+                                        or continue with {mode === "password" ? "email" : "otp"}
+                                    </span>
                                 </div>
 
-                                {error && (
-                                    <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-[6px] text-xs font-medium">
-                                        {error}
-                                    </div>
-                                )}
+                                {mode === "password" ? (
+                                    /* --- PASSWORD LOGIN FORM --- */
+                                    <form onSubmit={handlePasswordLogin} className="space-y-5">
+                                        {error && (
+                                            <div className="bg-[#690005]/40 border border-[#ffb4ab]/30 text-[#ffb4ab] p-3.5 rounded-xl text-xs">
+                                                {error}
+                                            </div>
+                                        )}
 
-                                {!otpSent ? (
-                                    <form onSubmit={handleSendOtp} className="space-y-4">
                                         <div>
-                                            <label className="block text-xs font-semibold text-[#4a4a4a] uppercase tracking-wider mb-1.5" htmlFor="otp-email">
-                                                Your Email Address
+                                            <label className="block text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest mb-1.5" htmlFor="login-email">
+                                                Email Address
                                             </label>
                                             <input
-                                                id="otp-email"
+                                                id="login-email"
                                                 type="email"
                                                 value={email}
                                                 onChange={(e) => { setEmail(e.target.value); setError(null); }}
                                                 required
-                                                placeholder="you@example.com"
-                                                className="w-full border border-[#e8e6e1] rounded-[6px] px-3.5 py-3 text-sm text-[#1a1a1a] placeholder-[#b5b2ac] focus:outline-none focus:ring-1 focus:ring-[#1a1a1a] focus:border-[#1a1a1a] transition"
+                                                placeholder="client@wearaura.com"
+                                                className="form-input text-sm text-[#e5e1e4] placeholder:text-[#d1c5b4]/30"
                                             />
                                         </div>
 
-                                        <div className="p-3 bg-[#faf9f6] rounded-[6px] border border-[#e8e6e1] text-xs text-[#6a6a6a] space-y-1">
-                                            <p className="font-medium text-[#1a1a1a] flex items-center gap-1.5">
-                                                <Mail className="w-3.5 h-3.5 text-[#8a8a8a]" />
-                                                WearAura Fragrance Sender Note:
-                                            </p>
-                                            <p>Your authentication code will arrive with sender name <strong>WearAura Fragrance</strong>.</p>
+                                        <div>
+                                            <div className="flex justify-between items-center mb-1.5">
+                                                <label className="text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest" htmlFor="login-password">
+                                                    Password
+                                                </label>
+                                                <Link href="/forgot-password" className="text-[11px] text-[#e8c17b] hover:underline">
+                                                    Forgot password?
+                                                </Link>
+                                            </div>
+                                            <div className="relative">
+                                                <input
+                                                    id="login-password"
+                                                    type={showPassword ? "text" : "password"}
+                                                    value={password}
+                                                    onChange={(e) => { setPassword(e.target.value); setError(null); }}
+                                                    required
+                                                    placeholder="••••••••"
+                                                    className="form-input text-sm text-[#e5e1e4] pr-10 placeholder:text-[#d1c5b4]/30"
+                                                />
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setShowPassword(!showPassword)}
+                                                    className="absolute right-0 top-1/2 -translate-y-1/2 text-[#d1c5b4]/50 hover:text-[#e8c17b] transition-colors p-1"
+                                                >
+                                                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                                                </button>
+                                            </div>
                                         </div>
 
                                         <button
                                             type="submit"
                                             disabled={loading}
-                                            className="w-full py-3.5 rounded-[6px] bg-[#1a1a1a] text-white text-sm font-medium hover:bg-[#333] disabled:bg-[#a0a0a0] disabled:cursor-not-allowed transition-all shadow-sm active:scale-[0.99] flex items-center justify-center gap-2"
+                                            className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[#c9a461] text-[#412d00] text-xs font-semibold uppercase tracking-widest rounded-full hover:bg-[#e8c17b] transition-all duration-300 aura-glow disabled:opacity-50 mt-2"
                                         >
-                                            {loading ? "Sending Code…" : "Send Verification Code"}
+                                            {loading ? "Authenticating…" : "Sign In"}
                                             {!loading && <ArrowRight className="w-4 h-4" />}
                                         </button>
                                     </form>
                                 ) : (
-                                    <form onSubmit={handleVerifyOtp} className="space-y-4">
-                                        <div>
-                                            <label className="block text-xs font-semibold text-[#4a4a4a] uppercase tracking-wider mb-1.5" htmlFor="otp-code">
-                                                6-Digit Verification Code
-                                            </label>
-                                            <input
-                                                id="otp-code"
-                                                type="text"
-                                                maxLength={6}
-                                                value={otpCode}
-                                                onChange={(e) => {
-                                                    const val = e.target.value.replace(/\D/g, "");
-                                                    setOtpCode(val);
-                                                    setError(null);
-                                                }}
-                                                required
-                                                placeholder="123456"
-                                                className="w-full border border-[#e8e6e1] rounded-[6px] px-3.5 py-3 text-center text-2xl tracking-[0.35em] font-mono text-[#1a1a1a] placeholder-[#c0bdb8] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a] transition"
-                                                autoFocus
-                                            />
-                                        </div>
+                                    /* --- OTP LOGIN FORM --- */
+                                    <div className="space-y-5">
+                                        {error && (
+                                            <div className="bg-[#690005]/40 border border-[#ffb4ab]/30 text-[#ffb4ab] p-3.5 rounded-xl text-xs">
+                                                {error}
+                                            </div>
+                                        )}
 
-                                        <button
-                                            type="submit"
-                                            disabled={loading || otpCode.length < 6}
-                                            className="w-full py-3.5 rounded-[6px] bg-[#1a1a1a] text-white text-sm font-medium hover:bg-[#333] disabled:bg-[#a0a0a0] disabled:cursor-not-allowed transition-all shadow-sm active:scale-[0.99]"
-                                        >
-                                            {loading ? "Verifying…" : "Verify & Sign In"}
-                                        </button>
+                                        {!otpSent ? (
+                                            <form onSubmit={handleSendOtp} className="space-y-5">
+                                                <div>
+                                                    <label className="block text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest mb-1.5" htmlFor="otp-email">
+                                                        Email Address
+                                                    </label>
+                                                    <input
+                                                        id="otp-email"
+                                                        type="email"
+                                                        value={email}
+                                                        onChange={(e) => { setEmail(e.target.value); setError(null); }}
+                                                        required
+                                                        placeholder="client@wearaura.com"
+                                                        className="form-input text-sm text-[#e5e1e4] placeholder:text-[#d1c5b4]/30"
+                                                    />
+                                                </div>
 
-                                        <div className="flex items-center justify-between text-xs pt-1">
-                                            <button
-                                                type="button"
-                                                onClick={() => { setOtpSent(false); setOtpCode(""); }}
-                                                className="text-[#6a6a6a] hover:text-[#1a1a1a] underline"
-                                            >
-                                                Change Email
-                                            </button>
+                                                <button
+                                                    type="submit"
+                                                    disabled={loading}
+                                                    className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[#c9a461] text-[#412d00] text-xs font-semibold uppercase tracking-widest rounded-full hover:bg-[#e8c17b] transition-all duration-300 aura-glow disabled:opacity-50 mt-2"
+                                                >
+                                                    {loading ? "Sending Code…" : "Send Verification Code"}
+                                                    {!loading && <Mail className="w-4 h-4" />}
+                                                </button>
+                                            </form>
+                                        ) : (
+                                            <form onSubmit={handleVerifyOtp} className="space-y-5">
+                                                <div className="p-4 rounded-xl bg-[#201f21] border border-[#9a8f80]/15 text-xs text-[#d1c5b4] flex items-center justify-between">
+                                                    <span className="truncate">{email}</span>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => { setOtpSent(false); setOtpCode(""); }}
+                                                        className="text-[#e8c17b] hover:underline text-[11px] font-medium ml-2 shrink-0"
+                                                    >
+                                                        Change
+                                                    </button>
+                                                </div>
 
-                                            <button
-                                                type="button"
-                                                disabled={countdown > 0 || loading}
-                                                onClick={handleSendOtp}
-                                                className="text-[#1a1a1a] font-medium hover:underline disabled:text-[#a0a0a0] disabled:no-underline flex items-center gap-1"
-                                            >
-                                                <RefreshCw className={`w-3 h-3 ${loading ? "animate-spin" : ""}`} />
-                                                {countdown > 0 ? `Resend code in ${countdown}s` : "Resend Code"}
-                                            </button>
-                                        </div>
-                                    </form>
+                                                <div>
+                                                    <label className="block text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest mb-1.5" htmlFor="otp-code">
+                                                        6-Digit Code
+                                                    </label>
+                                                    <input
+                                                        id="otp-code"
+                                                        type="text"
+                                                        value={otpCode}
+                                                        onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                                                        required
+                                                        placeholder="123456"
+                                                        className="form-input text-center text-xl tracking-[0.4em] font-mono text-[#e8c17b]"
+                                                    />
+                                                </div>
+
+                                                <button
+                                                    type="submit"
+                                                    disabled={loading || otpCode.length < 6}
+                                                    className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[#c9a461] text-[#412d00] text-xs font-semibold uppercase tracking-widest rounded-full hover:bg-[#e8c17b] transition-all duration-300 aura-glow disabled:opacity-50"
+                                                >
+                                                    {loading ? "Verifying…" : "Confirm & Sign In"}
+                                                </button>
+
+                                                <div className="text-center pt-2">
+                                                    {countdown > 0 ? (
+                                                        <span className="text-xs text-[#9a8f80]">
+                                                            Resend code in {countdown}s
+                                                        </span>
+                                                    ) : (
+                                                        <button
+                                                            type="button"
+                                                            onClick={handleSendOtp}
+                                                            className="text-xs text-[#e8c17b] hover:underline inline-flex items-center gap-1"
+                                                        >
+                                                            <RefreshCw className="w-3 h-3" /> Resend Code
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            </form>
+                                        )}
+                                    </div>
                                 )}
                             </div>
                         )}
                     </div>
 
-                    {!success && (
-                        <div className="px-7 py-4 border-t border-[#e8e6e1] bg-[#faf9f6] text-center">
-                            <p className="text-xs text-[#8a8a8a]">
-                                Don&apos;t have a WearAura account?{" "}
-                                <Link href="/signup" className="text-[#1a1a1a] font-semibold hover:underline">
-                                    Create one now
-                                </Link>
-                            </p>
-                        </div>
-                    )}
+                    {/* Bottom Registration Link */}
+                    <div className="p-6 bg-[#0e0e10]/60 border-t border-[#9a8f80]/15 text-center text-xs text-[#d1c5b4]/80">
+                        Don&apos;t have an account?{" "}
+                        <Link href="/signup" className="text-[#e8c17b] hover:underline font-medium">
+                            Create an Account
+                        </Link>
+                    </div>
                 </div>
             </div>
         </main>

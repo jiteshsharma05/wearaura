@@ -2,107 +2,153 @@
 
 @theme {
   --font-sans: var(--font-inter);
-  --font-serif: var(--font-cormorant);
+  --font-serif: var(--font-eb-garamond);
+  --font-geist: var(--font-geist);
 }
 
 :root {
-  --bg-primary: #0B0B0D;
+  /* Stitch Design System: Aura Radiant Intelligence */
+  --surface: #131315;
+  --surface-dim: #131315;
+  --surface-bright: #39393b;
+  --surface-container-lowest: #0e0e10;
+  --surface-container-low: #1c1b1d;
+  --surface-container: #201f21;
+  --surface-container-high: #2a2a2c;
+  --surface-container-highest: #353437;
+  
+  --on-surface: #e5e1e4;
+  --on-surface-variant: #d1c5b4;
+  --inverse-surface: #e5e1e4;
+  --inverse-on-surface: #313032;
+  
+  --outline: #9a8f80;
+  --outline-variant: #4e4639;
+  
+  --primary: #e8c17b;
+  --on-primary: #412d00;
+  --primary-container: #c9a461;
+  --on-primary-container: #533a00;
+  --inverse-primary: #775a1e;
+  
+  --secondary: #c0c1ff;
+  --secondary-container: #3131c0;
+  --on-secondary-container: #b0b2ff;
+  
+  --tertiary: #3cddc7;
+  --error: #ffb4ab;
+  
+  --background: #131315;
+  --on-background: #e5e1e4;
+  
+  --obsidian-light: #16151A;
+  --parchment: #F2EFE9;
+  --smoke-gold: #8C8880;
+  --electric-indigo: #6366F1;
+  --soft-teal: #2DD4BF;
+  
+  /* Legacy mapping aliases */
+  --bg-primary: #131315;
   --bg-secondary: #16151A;
-  --bg-elevated: #1F1E25;
-  --text-primary: #F2EFE9;
-  --text-muted: #8C8880;
-  --accent-gold: #C9A461;
-  --accent-gold-light: #DFC082;
-  --accent-gold-dark: #9E7D3B;
-  --accent-deep: #6B4226;
-  --border-subtle: rgba(201, 164, 97, 0.12);
-  --border-card: rgba(255, 255, 255, 0.06);
+  --bg-elevated: #201f21;
+  --text-primary: #e5e1e4;
+  --text-muted: #d1c5b4;
+  --accent-gold: #e8c17b;
+  --accent-gold-light: #ffdea7;
+  --accent-gold-dark: #c9a461;
 }
 
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  background-color: #131315;
+  color: #e5e1e4;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
-  selection-background-color: rgba(201, 164, 97, 0.3);
-  selection-color: #F2EFE9;
 }
 
 ::selection {
   background-color: rgba(201, 164, 97, 0.35);
-  color: #F2EFE9;
+  color: #e5e1e4;
+}
+
+/* Glassmorphic Panels & Cards */
+.glass-panel, .glass-card {
+  background: rgba(22, 21, 26, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(140, 136, 128, 0.2);
+}
+
+/* Radiant Aura Glows */
+.aura-glow {
+  box-shadow: 0 0 40px rgba(201, 164, 97, 0.15);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.aura-glow:hover {
+  box-shadow: 0 0 60px rgba(201, 164, 97, 0.28);
+}
+
+.aura-glow-subtle {
+  box-shadow: 0 0 30px -5px rgba(232, 193, 123, 0.12);
+}
+
+/* Form Inputs (Minimal luxury underline) */
+.form-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(140, 136, 128, 0.3);
+  padding: 0.75rem 0;
+  color: #e5e1e4;
+  width: 100%;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-input:focus {
+  border-bottom-color: #e8c17b;
+  box-shadow: none;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0B0B0D;
+  background: #131315;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27252F;
+  background: #2a2a2c;
   border-radius: 4px;
-  border: 2px solid #0B0B0D;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #C9A461;
+  background: #e8c17b;
 }
 
-/* Signature Diffusing Scent Aura Animation */
+/* Signature Scent Aura Animation */
 @keyframes aura-breathe {
   0%, 100% {
     transform: scale(0.96) translate3d(0, 0, 0);
-    opacity: 0.45;
+    opacity: 0.4;
   }
   50% {
-    transform: scale(1.08) translate3d(0, -6px, 0);
-    opacity: 0.75;
-  }
-}
-
-@keyframes aura-pulse-slow {
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(0.98);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(1.05);
+    transform: scale(1.06) translate3d(0, -6px, 0);
+    opacity: 0.7;
   }
 }
 
 .scent-aura {
-  background: radial-gradient(ellipse 65% 65% at 50% 50%, rgba(107, 66, 38, 0.45) 0%, rgba(201, 164, 97, 0.14) 45%, rgba(11, 11, 13, 0) 75%);
+  background: radial-gradient(ellipse 65% 65% at 50% 50%, rgba(107, 66, 38, 0.45) 0%, rgba(232, 193, 123, 0.14) 45%, rgba(19, 19, 21, 0) 75%);
   animation: aura-breathe 8s ease-in-out infinite;
   pointer-events: none;
 }
 
-.scent-aura-card {
-  background: radial-gradient(circle at 50% 40%, rgba(201, 164, 97, 0.12) 0%, rgba(107, 66, 38, 0.18) 35%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-}
-
-.group:hover .scent-aura-card {
-  opacity: 1;
-  transform: scale(1.06);
-}
-
 /* Metallic Gold Gradient & Shimmer */
 .gold-text-gradient {
-  background: linear-gradient(135deg, #F2EFE9 0%, #C9A461 60%, #DFC082 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.gold-metallic-text {
-  background: linear-gradient(135deg, #DFC082 0%, #C9A461 40%, #B2883D 80%, #DFC082 100%);
+  background: linear-gradient(135deg, #F2EFE9 0%, #e8c17b 60%, #ffdea7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -111,7 +157,7 @@ body {
 .aura-divider {
   position: relative;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(201, 164, 97, 0.25) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(232, 193, 123, 0.25) 50%, transparent 100%);
 }
 
 .aura-divider::after {
@@ -123,23 +169,22 @@ body {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #C9A461;
-  box-shadow: 0 0 10px #C9A461;
+  background: #e8c17b;
+  box-shadow: 0 0 10px #e8c17b;
 }
 
 /* Accessible focus ring */
 :focus-visible {
-  outline: 2px solid #C9A461;
+  outline: 2px solid #e8c17b;
   outline-offset: 2px;
 }
 
-/* Respect Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .scent-aura,
-  .scent-aura-card,
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
+

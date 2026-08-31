@@ -225,15 +225,15 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
                 toast.success("Added to wishlist");
             }
         }
-    };
+    }
 
     /* ─── Loading State ─── */
     if (loading) {
         return (
-            <main className="min-h-screen bg-[#FAF9F6] px-4 py-16 flex justify-center items-center">
+            <main className="min-h-screen bg-[#131315] text-[#e5e1e4] px-4 py-24 flex justify-center items-center">
                 <div className="animate-pulse flex flex-col items-center">
-                    <div className="h-8 w-8 bg-[#e8e6e1] rounded-full mb-4"></div>
-                    <p className="text-[#8a8a8a] font-light">Loading details...</p>
+                    <div className="h-10 w-10 border-2 border-[#e8c17b] border-t-transparent rounded-full animate-spin mb-4"></div>
+                    <p className="text-[#d1c5b4] font-light text-sm tracking-wider uppercase">Loading olfactory details...</p>
                 </div>
             </main>
         );
@@ -242,15 +242,12 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
     /* ─── Error State ─── */
     if (error || !product) {
         return (
-            <main className="min-h-screen bg-[#FAF9F6] px-4 py-24 flex flex-col items-center justify-center">
-                <div className="text-center max-w-md">
-                    <svg className="mx-auto h-12 w-12 text-[#8a8a8a] mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <h1 className="text-2xl font-serif font-light text-[#1a1a1a] tracking-tight mb-2">Product Not Found</h1>
-                    <p className="text-[#4a4a4a] font-light mb-8">The product you&apos;re looking for doesn&apos;t exist or has been removed from our catalog.</p>
-                    <button onClick={() => router.push('/')} className="inline-flex items-center justify-center bg-[#1a1a1a] px-8 py-4 text-sm font-medium text-white hover:bg-[#333] transition-colors rounded-[2px] tracking-wide">
-                        Return to Store
+            <main className="min-h-screen bg-[#131315] text-[#e5e1e4] px-4 py-28 flex flex-col items-center justify-center">
+                <div className="text-center max-w-md glass-card p-10 rounded-2xl">
+                    <h1 className="text-2xl font-serif text-[#e5e1e4] mb-3">Fragrance Not Found</h1>
+                    <p className="text-[#d1c5b4] font-light mb-8 text-sm">The fragrance you&apos;re looking for doesn&apos;t exist or has been removed from our anthology.</p>
+                    <button onClick={() => router.push('/')} className="inline-flex items-center justify-center bg-[#c9a461] text-[#412d00] px-8 py-3.5 text-xs font-semibold uppercase tracking-widest hover:bg-[#e8c17b] transition-colors rounded-full aura-glow">
+                        Return to Boutique
                     </button>
                 </div>
             </main>
@@ -260,39 +257,36 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
     const galleryImages = [product.image_url, ...reviews.map(r => r.image_url).filter(Boolean)].filter(Boolean);
 
     return (
-        <main className="min-h-screen bg-[#FAF9F6]">
-            <div className="container mx-auto px-4 py-12 max-w-7xl">
+        <main className="min-h-screen bg-[#131315] text-[#e5e1e4] pt-8 pb-28">
+            <div className="container mx-auto px-6 max-w-7xl">
                 {/* Breadcrumb */}
                 <div className="mb-8">
-                    <button onClick={() => router.back()} className="inline-flex items-center text-sm font-light text-[#8a8a8a] hover:text-[#1a1a1a] transition-colors">
-                        <svg className="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <button onClick={() => router.back()} className="inline-flex items-center text-xs uppercase tracking-widest text-[#d1c5b4]/80 hover:text-[#e8c17b] transition-colors">
+                        <svg className="mr-2 h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
-                        Back to browsing
+                        Back to Anthology
                     </button>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 mb-20">
-
-                    {/* Left: Image */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-20">
+                    {/* Left: Image Container */}
                     <div className="flex flex-col gap-4">
-                        <div className="w-full aspect-[4/5] sm:aspect-square lg:aspect-[4/5] bg-[#f0eeea] rounded-[2px] overflow-hidden relative border border-[#e8e6e1]">
+                        <div className="w-full aspect-[4/5] glass-card rounded-2xl overflow-hidden relative flex items-center justify-center p-8">
                             {product.image_url ? (
                                 <img
                                     src={product.image_url}
                                     alt={product.name}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-contain mix-blend-screen drop-shadow-2xl"
                                 />
                             ) : (
-                                <div className="absolute inset-0 flex items-center justify-center text-[#8a8a8a]">
-                                    <svg className="w-12 h-12 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
+                                <div className="text-[#d1c5b4]/40 font-serif italic">
+                                    WearAura Flacon
                                 </div>
                             )}
 
                             {product.stock === 0 && (
-                                <div className="absolute top-6 right-6 bg-white/95 backdrop-blur-md text-[#1a1a1a] text-xs font-semibold px-4 py-2 uppercase tracking-widest">
+                                <div className="absolute top-6 right-6 bg-[#131315]/90 border border-[#ffb4ab]/40 text-[#ffb4ab] text-[10px] font-semibold px-4 py-1.5 uppercase tracking-widest rounded-full">
                                     Sold Out
                                 </div>
                             )}
@@ -302,8 +296,8 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
                         {galleryImages.length > 1 && (
                             <div className="flex gap-3 overflow-x-auto pb-2">
                                 {galleryImages.slice(0, 5).map((img, i) => (
-                                    <div key={i} className="w-20 h-24 sm:w-24 sm:h-28 flex-shrink-0 rounded-[2px] overflow-hidden bg-[#f0eeea] border border-[#e8e6e1] cursor-pointer hover:opacity-80 transition-opacity">
-                                        <img src={img} className="w-full h-full object-cover" alt="Gallery" />
+                                    <div key={i} className="w-20 h-24 flex-shrink-0 rounded-xl overflow-hidden glass-card p-2 cursor-pointer hover:border-[#e8c17b] transition-colors">
+                                        <img src={img} className="w-full h-full object-contain mix-blend-screen" alt="Gallery" />
                                     </div>
                                 ))}
                             </div>
@@ -311,46 +305,52 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
                     </div>
 
                     {/* Right: Product Info */}
-                    <div className="flex flex-col pt-4 lg:pt-10">
+                    <div className="flex flex-col justify-center">
                         {product.category && (
-                            <p className="text-xs font-semibold uppercase tracking-widest text-[#8a8a8a] mb-3">{product.category}</p>
+                            <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#e8c17b] mb-3 font-mono">
+                                {product.category}
+                            </span>
                         )}
-                        <h1 className="text-4xl sm:text-5xl font-serif font-light text-[#1a1a1a] mb-4 tracking-tight leading-tight">{product.name}</h1>
-                        <p className="text-2xl text-[#1a1a1a] font-medium mb-8 font-sans">₹{Number(product.price).toFixed(2)}</p>
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#e5e1e4] mb-4 leading-tight">
+                            {product.name}
+                        </h1>
+                        <p className="text-2xl text-[#e8c17b] font-semibold mb-6 font-sans">
+                            ₹{Number(product.price).toFixed(2)}
+                        </p>
 
-                        <div className="mb-10 text-[#4a4a4a] font-light leading-relaxed text-base">
-                            <p className="whitespace-pre-line">{product.description || "A captivating fragrance designed for the modern individual."}</p>
+                        <div className="mb-8 text-[#d1c5b4] font-light leading-relaxed text-sm sm:text-base border-y border-[#9a8f80]/15 py-6">
+                            <p className="whitespace-pre-line">{product.description || "A captivating extrait de parfum designed for the discerning individual."}</p>
                         </div>
 
                         <div className="mb-8">
                             <div className="flex items-center gap-2 mb-4">
-                                <span className={`inline-flex items-center px-3 py-1 text-xs font-medium tracking-wide
+                                <span className={`inline-flex items-center px-3 py-1 text-xs font-medium tracking-wide rounded-full border
                                     ${product.stock > 10
-                                        ? 'bg-green-50 text-green-700 border border-green-200'
+                                        ? 'bg-[#003731]/30 text-[#3cddc7] border-[#3cddc7]/30'
                                         : product.stock > 0
-                                            ? 'bg-amber-50 text-amber-700 border border-amber-200'
-                                            : 'bg-red-50 text-red-700 border border-red-200'
+                                            ? 'bg-[#412d00]/30 text-[#e8c17b] border-[#e8c17b]/30'
+                                            : 'bg-[#690005]/30 text-[#ffb4ab] border-[#ffb4ab]/30'
                                     }`}>
-                                    {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
+                                    {product.stock > 0 ? `${product.stock} available in batch` : 'Currently out of stock'}
                                 </span>
                             </div>
 
                             {/* Quantity Selector */}
-                            <div className="flex items-center gap-6 mt-6 pb-8 border-b border-[#e8e6e1]">
-                                <span className="text-sm font-medium text-[#1a1a1a]">Quantity</span>
-                                <div className="flex items-center border border-[#e8e6e1] bg-white">
+                            <div className="flex items-center gap-6 mt-6 pb-6">
+                                <span className="text-xs uppercase tracking-widest text-[#d1c5b4]">Quantity</span>
+                                <div className="flex items-center border border-[#9a8f80]/20 bg-[#16151A] rounded-full overflow-hidden">
                                     <button
                                         onClick={() => handleQuantityChange(-1)}
                                         disabled={quantity <= 1 || product.stock === 0}
-                                        className="w-10 h-10 flex items-center justify-center text-[#4a4a4a] hover:text-[#1a1a1a] disabled:opacity-30 transition-colors"
+                                        className="w-9 h-9 flex items-center justify-center text-[#d1c5b4] hover:text-[#e8c17b] disabled:opacity-30 transition-colors"
                                     >
                                         &minus;
                                     </button>
-                                    <span className="w-12 text-center text-sm font-medium text-[#1a1a1a] select-none">{product.stock > 0 ? quantity : 0}</span>
+                                    <span className="w-10 text-center text-xs font-medium text-[#e5e1e4] select-none">{product.stock > 0 ? quantity : 0}</span>
                                     <button
                                         onClick={() => handleQuantityChange(1)}
                                         disabled={quantity >= product.stock || product.stock === 0}
-                                        className="w-10 h-10 flex items-center justify-center text-[#4a4a4a] hover:text-[#1a1a1a] disabled:opacity-30 transition-colors"
+                                        className="w-9 h-9 flex items-center justify-center text-[#d1c5b4] hover:text-[#e8c17b] disabled:opacity-30 transition-colors"
                                     >
                                         &#43;
                                     </button>
@@ -362,9 +362,9 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
                             <button
                                 onClick={handleAddToCart}
                                 disabled={product.stock <= 0}
-                                className={`flex-1 py-4 px-8 font-medium text-sm tracking-wide transition-all rounded-[2px] ${product.stock > 0
-                                    ? 'bg-[#1a1a1a] text-white hover:bg-[#333]'
-                                    : 'bg-[#e8e6e1] text-[#8a8a8a] cursor-not-allowed'
+                                className={`flex-1 py-4 px-8 font-semibold text-xs uppercase tracking-widest transition-all rounded-full aura-glow ${product.stock > 0
+                                    ? 'bg-[#c9a461] text-[#412d00] hover:bg-[#e8c17b]'
+                                    : 'bg-[#201f21] text-[#9a8f80] cursor-not-allowed'
                                     }`}
                             >
                                 {product.stock > 0 ? `Add to Cart — ₹${(product.price * quantity).toFixed(2)}` : 'Out of Stock'}
@@ -372,14 +372,14 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
 
                             <button
                                 onClick={handleToggleWishlist}
-                                className={`p-4 border transition-all rounded-[2px] ${isInWishlist
-                                    ? 'bg-[#f0eeea] border-[#e8e6e1] text-[#1a1a1a]'
-                                    : 'bg-white border-[#e8e6e1] text-[#8a8a8a] hover:text-[#1a1a1a]'
+                                className={`p-4 border transition-all rounded-full ${isInWishlist
+                                    ? 'bg-[#201f21] border-[#e8c17b] text-[#e8c17b]'
+                                    : 'glass-card border-[#9a8f80]/20 text-[#d1c5b4] hover:text-[#e8c17b] hover:border-[#e8c17b]'
                                     }`}
                                 aria-label={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
                             >
                                 <svg
-                                    className={`w-5 h-5 ${isInWishlist ? 'fill-[#1a1a1a] stroke-[#1a1a1a]' : 'fill-none stroke-current'}`}
+                                    className={`w-5 h-5 ${isInWishlist ? 'fill-[#e8c17b] stroke-[#e8c17b]' : 'fill-none stroke-current'}`}
                                     viewBox="0 0 24 24"
                                 >
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -390,22 +390,23 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
                 </div>
 
                 {/* ─── Reviews Section ─── */}
-                <div className="border-t border-[#e8e6e1] pt-16 mt-16 pb-24">
+                <div className="border-t border-[#9a8f80]/15 pt-16 mt-16 pb-20">
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                         <div>
-                            <h2 className="text-3xl font-serif font-light text-[#1a1a1a] tracking-tight">Customer Reviews</h2>
+                            <span className="text-xs uppercase tracking-widest text-[#e8c17b] block mb-2">Verified Sillage</span>
+                            <h2 className="text-3xl font-serif text-[#e5e1e4]">Client Impressions</h2>
                             <div className="flex items-center gap-3 mt-3">
-                                <div className="flex items-center">
+                                <div className="flex items-center text-[#e8c17b]">
                                     {[1, 2, 3, 4, 5].map(star => {
                                         const avgRating = reviews.length > 0 ? reviews.reduce((a, b) => a + b.rating, 0) / reviews.length : 0;
                                         return (
-                                            <svg key={star} className={`w-5 h-5 ${star <= Math.round(avgRating) ? 'text-[#1a1a1a]' : 'text-[#e8e6e1]'}`} fill="currentColor" viewBox="0 0 20 20">
+                                            <svg key={star} className={`w-4 h-4 ${star <= Math.round(avgRating) ? 'fill-[#e8c17b] text-[#e8c17b]' : 'text-[#9a8f80]/30'}`} fill="currentColor" viewBox="0 0 20 20">
                                                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                             </svg>
                                         );
                                     })}
                                 </div>
-                                <p className="text-[#8a8a8a] text-sm font-light">
+                                <p className="text-[#d1c5b4] text-xs font-light">
                                     {reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}
                                 </p>
                             </div>
@@ -414,28 +415,28 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
                         {hasPurchased ? (
                             <button
                                 onClick={() => setShowReviewForm(!showReviewForm)}
-                                className="inline-flex items-center justify-center border border-[#1a1a1a] bg-transparent px-6 py-3 text-sm font-medium text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-white transition-colors rounded-[2px] tracking-wide"
+                                className="inline-flex items-center justify-center border border-[#e8c17b] bg-transparent px-6 py-2.5 text-xs font-semibold uppercase tracking-widest text-[#e8c17b] hover:bg-[#e8c17b]/10 transition-colors rounded-full"
                             >
                                 {showReviewForm ? 'Cancel Review' : 'Write a Review'}
                             </button>
                         ) : (
-                            <div className="text-sm text-[#8a8a8a] font-light italic">Only verified buyers can leave a review.</div>
+                            <div className="text-xs text-[#d1c5b4]/60 font-light italic">Verified clients can submit fragrance reviews.</div>
                         )}
                     </div>
 
                     {showReviewForm && user && (
-                        <div className="bg-[#f0eeea] border border-[#e8e6e1] rounded-[4px] p-6 sm:p-8 mb-12">
-                            <h3 className="text-xl font-serif text-[#1a1a1a] mb-6">Write your review</h3>
+                        <div className="glass-card rounded-2xl p-6 sm:p-8 mb-12 max-w-2xl">
+                            <h3 className="text-xl font-serif text-[#e5e1e4] mb-6">Your Impression</h3>
 
                             {reviewError && (
-                                <div className="mb-6 p-4 bg-red-50 text-red-600 text-sm rounded-[4px] border border-red-100">
+                                <div className="mb-6 p-4 bg-[#690005]/40 text-[#ffb4ab] text-xs rounded-lg border border-[#ffb4ab]/30">
                                     {reviewError}
                                 </div>
                             )}
 
-                            <form onSubmit={handleSubmitReview} className="space-y-6 max-w-2xl">
+                            <form onSubmit={handleSubmitReview} className="space-y-6">
                                 <div>
-                                    <label className="block text-sm font-medium text-[#4a4a4a] mb-2">Rating</label>
+                                    <label className="block text-xs uppercase tracking-widest text-[#d1c5b4] mb-2">Rating</label>
                                     <div className="flex gap-2">
                                         {[1, 2, 3, 4, 5].map(star => (
                                             <button
@@ -443,7 +444,7 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
                                                 onClick={() => setSubmitReviewData({ ...submitReviewData, rating: star })}
                                                 className="focus:outline-none"
                                             >
-                                                <svg className={`w-8 h-8 transition-colors ${star <= submitReviewData.rating ? 'text-amber-400' : 'text-[#e8e6e1] hover:text-amber-200'}`} fill="currentColor" viewBox="0 0 20 20">
+                                                <svg className={`w-6 h-6 transition-colors ${star <= submitReviewData.rating ? 'text-[#e8c17b] fill-[#e8c17b]' : 'text-[#9a8f80]/30 hover:text-[#e8c17b]'}`} fill="currentColor" viewBox="0 0 20 20">
                                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                                 </svg>
                                             </button>
@@ -452,115 +453,75 @@ export default function ProductDetailClient({ id }: ProductDetailClientProps) {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="comment" className="block text-sm font-medium text-[#4a4a4a] mb-2">Your Experience</label>
+                                    <label className="block text-xs uppercase tracking-widest text-[#d1c5b4] mb-2">Your Review</label>
                                     <textarea
-                                        id="comment" required rows={4}
+                                        required
+                                        rows={4}
                                         value={submitReviewData.comment}
                                         onChange={(e) => setSubmitReviewData({ ...submitReviewData, comment: e.target.value })}
-                                        className="block w-full border border-[#e8e6e1] bg-[#FAF9F6] px-4 py-3 text-[#1a1a1a] focus:ring-1 focus:ring-[#1a1a1a] focus:border-[#1a1a1a] focus:outline-none text-sm resize-none rounded-[2px] transition-shadow font-sans placeholder:text-[#c4c0bb]"
-                                        placeholder="Tell us what you loved about this fragrance..."
+                                        placeholder="Describe the notes, projection, and wear on your skin..."
+                                        className="form-input text-sm resize-none"
                                     />
                                 </div>
 
-                                <div>
-                                    <label className="block text-sm font-medium text-[#4a4a4a] mb-2">Photo (Optional)</label>
-                                    <div className="flex items-center gap-4">
-                                        {reviewImagePreview ? (
-                                            <div className="relative w-24 h-24 border border-[#e8e6e1] rounded-[2px] overflow-hidden">
-                                                <img src={reviewImagePreview} className="w-full h-full object-cover" />
-                                                <button type="button" onClick={() => { setReviewImageFile(null); setReviewImagePreview(null); }} className="absolute top-1 right-1 bg-black/50 hover:bg-black/70 text-white rounded-full p-1 transition-colors"><X className="w-3 h-3" /></button>
-                                            </div>
-                                        ) : (
-                                            <label className="flex flex-col items-center justify-center w-24 h-24 border-2 border-dashed border-[#e8e6e1] rounded-[2px] cursor-pointer hover:bg-[#f0eeea] transition-colors">
-                                                <Upload className="w-6 h-6 text-[#8a8a8a] mb-1" />
-                                                <span className="text-[10px] text-[#8a8a8a] font-medium">Upload Image</span>
-                                                <input type="file" accept="image/*" onChange={handleReviewImageChange} className="hidden" />
-                                            </label>
-                                        )}
-                                    </div>
-                                    <p className="mt-2 text-xs text-[#8a8a8a] font-light">Add a photo of your product to show others!</p>
-                                </div>
-
-                                <div className="flex justify-end gap-3 pt-4">
-                                    <button
-                                        type="button" onClick={() => setShowReviewForm(false)}
-                                        className="px-5 py-3 text-sm font-medium text-[#4a4a4a] hover:text-[#1a1a1a] transition-colors"
-                                    >
-                                        Cancel
-                                    </button>
-                                    <button
-                                        type="submit" disabled={submittingReview}
-                                        className="inline-flex items-center justify-center bg-[#1a1a1a] px-6 py-3 text-sm font-medium text-white hover:bg-[#333] disabled:opacity-50 transition-colors rounded-[2px] tracking-wide"
-                                    >
-                                        {submittingReview ? 'Submitting...' : 'Submit Review'}
-                                    </button>
-                                </div>
+                                <button
+                                    type="submit"
+                                    disabled={submittingReview}
+                                    className="bg-[#c9a461] text-[#412d00] hover:bg-[#e8c17b] px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-widest transition-all aura-glow disabled:opacity-50"
+                                >
+                                    {submittingReview ? 'Submitting...' : 'Post Review'}
+                                </button>
                             </form>
                         </div>
                     )}
 
-                    {reviews.length === 0 ? (
-                        <div className="py-16 text-center bg-[#f0eeea] rounded-[4px] border border-dashed border-[#e8e6e1]">
-                            <p className="text-[#8a8a8a] font-light italic">No reviews yet. Be the first to share your experience!</p>
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {reviews.map((review) => (
-                                <div key={review.id} className="bg-white p-6 sm:p-8 rounded-[4px] border border-[#e8e6e1] flex flex-col">
-                                    <div className="flex justify-between items-start mb-4">
-                                        <div className="flex">
-                                            {[1, 2, 3, 4, 5].map(star => (
-                                                <svg key={star} className={`w-4 h-4 ${star <= review.rating ? 'text-[#1a1a1a]' : 'text-[#e8e6e1]'}`} fill="currentColor" viewBox="0 0 20 20">
-                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                </svg>
-                                            ))}
-                                        </div>
-                                        <span className="text-xs text-[#8a8a8a] font-light">
-                                            {new Date(review.created_at).toLocaleDateString()}
-                                        </span>
+                    {reviews.length > 0 ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {reviews.map((rev) => (
+                                <div key={rev.id} className="glass-card p-6 rounded-2xl space-y-3">
+                                    <div className="flex items-center text-[#e8c17b]">
+                                        {[1, 2, 3, 4, 5].map((s) => (
+                                            <svg key={s} className={`w-3.5 h-3.5 ${s <= rev.rating ? 'fill-[#e8c17b] text-[#e8c17b]' : 'text-[#9a8f80]/30'}`} fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        ))}
                                     </div>
-                                    <p className="text-[#4a4a4a] leading-relaxed text-sm flex-1 whitespace-pre-line mb-6 font-light">
-                                        &ldquo;{review.comment}&rdquo;
-                                    </p>
-
-                                    {review.image_url && (
-                                        <div className="w-full h-32 rounded-[2px] overflow-hidden bg-[#f0eeea] mt-auto border border-[#e8e6e1]">
-                                            <img src={review.image_url} alt="Review attachment" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 cursor-pointer" />
-                                        </div>
-                                    )}
+                                    <p className="text-sm text-[#e5e1e4] font-light leading-relaxed">&ldquo;{rev.comment}&rdquo;</p>
+                                    <p className="text-[10px] text-[#9a8f80] uppercase tracking-wider">{new Date(rev.created_at).toLocaleDateString()}</p>
                                 </div>
                             ))}
                         </div>
+                    ) : (
+                        <p className="text-xs text-[#d1c5b4]/60 font-light italic">Be the first to share your olfactory impression.</p>
                     )}
                 </div>
 
-                {/* ─── Related / Suggested Products ─── */}
+                {/* ─── Related Fragrances ─── */}
                 {relatedProducts.length > 0 && (
-                    <div className="border-t border-[#e8e6e1] pt-16 mt-8 pb-16">
-                        <h2 className="text-3xl font-serif font-light text-[#1a1a1a] tracking-tight mb-12">You Might Also Like</h2>
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                            {relatedProducts.map((relProduct) => (
-                                <Link href={`/products/${relProduct.id}`} key={relProduct.id} className="group flex flex-col">
-                                    <div className="relative w-full aspect-[3/4] rounded-[2px] overflow-hidden bg-[#f0eeea] mb-4 border border-[#e8e6e1]">
-                                        {relProduct.image_url ? (
-                                            <img
-                                                src={relProduct.image_url}
-                                                alt={relProduct.name}
-                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                            />
+                    <div className="border-t border-[#9a8f80]/15 pt-16">
+                        <div className="text-center mb-12 space-y-2">
+                            <span className="text-xs uppercase tracking-widest text-[#e8c17b]">Complementary Notes</span>
+                            <h2 className="text-3xl font-serif text-[#e5e1e4]">You May Also Appreciate</h2>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {relatedProducts.slice(0, 4).map((rel) => (
+                                <div
+                                    key={rel.id}
+                                    onClick={() => router.push(`/products/${rel.id}`)}
+                                    className="glass-card p-6 rounded-2xl flex flex-col justify-between group cursor-pointer hover:-translate-y-1 transition-all"
+                                >
+                                    <div className="h-44 flex items-center justify-center mb-4">
+                                        {rel.image_url ? (
+                                            <img src={rel.image_url} alt={rel.name} className="w-full h-full object-contain mix-blend-screen opacity-80 group-hover:opacity-100 transition-opacity" />
                                         ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-[#8a8a8a]">
-                                                <span className="font-sans text-sm">No Image</span>
-                                            </div>
+                                            <div className="text-[#d1c5b4]/40 font-serif italic text-xs">WearAura Flacon</div>
                                         )}
                                     </div>
-                                    <div className="flex flex-col text-left">
-                                        <h3 className="font-sans text-[#1a1a1a] text-base font-medium mb-1 group-hover:underline decoration-1 underline-offset-4 transition-colors">
-                                            {relProduct.name}
-                                        </h3>
-                                        <p className="font-sans text-sm text-[#1a1a1a]">₹{Number(relProduct.price).toFixed(2)}</p>
+                                    <div>
+                                        <h4 className="text-base font-serif text-[#e5e1e4] truncate group-hover:text-[#e8c17b] transition-colors">{rel.name}</h4>
+                                        <p className="text-sm font-semibold text-[#e8c17b] mt-1">₹{Number(rel.price).toFixed(2)}</p>
                                     </div>
-                                </Link>
+                                </div>
                             ))}
                         </div>
                     </div>

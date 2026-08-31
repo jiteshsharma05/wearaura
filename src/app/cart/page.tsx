@@ -144,7 +144,34 @@ export default function CartPage() {
 
             if (itemsError) throw itemsError;
 
-            // 4. Clear cart and redirect
+            // 4. Trigger order confirmation email
+            fetch("/api/send-order-confirmation", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    orderId: orderData.id,
+                    customerEmail: user.email || "",
+                    customerName: fullName.trim(),
+                    phoneNumber: phoneNumber.trim(),
+                    address: {
+                        addressLine1: addressLine1.trim(),
+                        addressLine2: addressLine2.trim(),
+                        city: city.trim(),
+                        state: state.trim(),
+                        pincode: pincode.trim(),
+                    },
+                    items: items.map(item => ({
+                        product_id: item.id,
+                        name: item.name,
+                        quantity: item.quantity,
+                        price: item.price,
+                    })),
+                    totalAmount: cartTotal,
+                    paymentMethod: "cod",
+                }),
+            }).catch(e => console.error("Error triggering order email:", e));
+
+            // 5. Clear cart and redirect
             clearCart();
             router.push(`/order-success?orderId=${orderData.id}&method=cod`);
 
@@ -257,6 +284,34 @@ export default function CartPage() {
                         if (!verifyResponse.ok) {
                             throw new Error(verifyData.error || "Payment verification failed");
                         }
+
+                        // Trigger order confirmation email
+                        fetch("/api/send-order-confirmation", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                orderId: createOrderData.order_id,
+                                customerEmail: user.email || "",
+                                customerName: fullName.trim(),
+                                phoneNumber: phoneNumber.trim(),
+                                address: {
+                                    addressLine1: addressLine1.trim(),
+                                    addressLine2: addressLine2.trim(),
+                                    city: city.trim(),
+                                    state: state.trim(),
+                                    pincode: pincode.trim(),
+                                },
+                                items: items.map(item => ({
+                                    product_id: item.id,
+                                    name: item.name,
+                                    quantity: item.quantity,
+                                    price: item.price,
+                                })),
+                                totalAmount: cartTotal,
+                                paymentMethod: "online",
+                                paymentId: response.razorpay_payment_id,
+                            }),
+                        }).catch(e => console.error("Error triggering order email:", e));
 
                         // Payment verified successfully
                         clearCart();
