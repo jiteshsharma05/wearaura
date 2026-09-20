@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "../../lib/supabase";
+import { isAdminEmail } from "../../lib/adminConfig";
 
 function SidebarMenu({
     isOpen,
@@ -225,7 +226,7 @@ export default function Header() {
                 .select("role")
                 .eq("id", user.id)
                 .single()
-                .then(({ data }) => setIsAdmin(data?.role === "admin"));
+                .then(({ data }) => setIsAdmin(data?.role === "admin" || isAdminEmail(user.email)));
         } else {
             setIsAdmin(false);
         }

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useAuth } from "../../components/AuthProvider";
 import { supabase } from "../../../lib/supabase";
 import { ShoppingBag, Settings, MapPin, Heart, Package, MessageSquare, RefreshCcw } from "lucide-react";
+import { isAdminEmail } from "../../../lib/adminConfig";
 
 interface Profile {
     id: string;
@@ -37,7 +38,12 @@ export default function AccountPage() {
                         .single();
 
                     if (profileData) {
+                        if (isAdminEmail(user.email)) {
+                            profileData.role = 'admin';
+                        }
                         setProfile(profileData);
+                    } else if (isAdminEmail(user.email)) {
+                        setProfile({ id: user.id, role: 'admin' });
                     }
 
                     // Fetch Orders Count

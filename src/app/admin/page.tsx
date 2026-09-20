@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "../../components/AuthProvider";
 import { supabase } from "../../../lib/supabase";
 import toast from "react-hot-toast";
+import { isAdminEmail } from "../../../lib/adminConfig";
 import { LayoutDashboard, ShoppingBag, Package as PackageIcon, MessageSquare, Settings as SettingsIcon, Menu, X, DollarSign, TrendingUp, ChevronDown, Check, Trash2, Edit2, Users, Upload, Image as LucideImage } from "lucide-react";
 import Image from "next/image";
 import { uploadImageToCloudinary } from '@/components/utils/cloudinaryUpload';
@@ -189,10 +190,10 @@ export default function AdminPage() {
                         .eq("id", user.id)
                         .single();
 
-                    if (error || data?.role !== 'admin') {
-                        router.push("/");
+                    if (data?.role === 'admin' || isAdminEmail(user.email)) {
+                        setProfile(data ?? { id: user.id, role: 'admin' });
                     } else {
-                        setProfile(data);
+                        router.push("/");
                     }
                 } catch (err) {
                     router.push("/");
