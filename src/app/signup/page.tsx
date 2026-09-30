@@ -4,23 +4,14 @@ import { useState, useEffect } from "react";
 import { supabase } from "../../../lib/supabase";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff, CheckCircle2, Mail, Lock, Sparkles, ArrowRight, RefreshCw } from "lucide-react";
+import { CheckCircle2, Mail, Sparkles, RefreshCw } from "lucide-react";
 import toast from "react-hot-toast";
-
-type SignupMode = "password" | "otp";
 
 export default function SignupPage() {
     const router = useRouter();
 
-    const [mode, setMode] = useState<SignupMode>("password");
-
-    // Password signup states
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [fullName, setFullName] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
-
     // OTP signup states
+    const [email, setEmail] = useState("");
     const [otpCode, setOtpCode] = useState("");
     const [otpSent, setOtpSent] = useState(false);
     const [countdown, setCountdown] = useState(0);
@@ -39,50 +30,6 @@ export default function SignupPage() {
         return () => clearInterval(timer);
     }, [countdown]);
 
-    // Handle Password Signup
-    const handleEmailSignup = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        setError(null);
-
-        try {
-            const { data, error: signUpError } = await supabase.auth.signUp({
-                email: email.trim(),
-                password,
-                options: {
-                    data: {
-                        full_name: fullName.trim() || undefined,
-                    },
-                },
-            });
-
-            if (signUpError) {
-                setError(signUpError.message);
-                toast.error(signUpError.message);
-            } else {
-                setSuccess(true);
-                if (data?.session) {
-                    setSuccessMessage("Account created! Welcome to WearAura.");
-                    toast.success("Account created successfully");
-                    setTimeout(() => {
-                        router.push("/");
-                        router.refresh();
-                    }, 1200);
-                } else {
-                    setSuccessMessage("Account registered! A verification link has been sent to your email.");
-                    toast.success("Please check your email to confirm registration");
-                    setTimeout(() => {
-                        router.push("/login");
-                    }, 2500);
-                }
-            }
-        } catch (err: unknown) {
-            setError(err instanceof Error ? err.message : "Failed to create account");
-        } finally {
-            setLoading(false);
-        }
-    };
-
     // Handle Send Signup OTP
     const handleSendOtp = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -99,9 +46,6 @@ export default function SignupPage() {
                 email: email.trim(),
                 options: {
                     shouldCreateUser: true,
-                    data: {
-                        full_name: fullName.trim() || undefined,
-                    },
                 },
             });
 
@@ -203,33 +147,13 @@ export default function SignupPage() {
 
                 {/* Main Glass Card */}
                 <div className="glass-card rounded-2xl overflow-hidden border border-[#9a8f80]/15 shadow-2xl">
-                    {/* Mode Switch Tabs */}
+                    {/* Header bar (no tabs — single mode) */}
                     {!success && (
                         <div className="flex border-b border-[#9a8f80]/15 bg-[#0e0e10]/60">
-                            <button
-                                type="button"
-                                onClick={() => { setMode("password"); setError(null); }}
-                                className={`flex-1 py-4 text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all ${
-                                    mode === "password"
-                                        ? "bg-[#201f21] text-[#e8c17b] border-b-2 border-[#e8c17b]"
-                                        : "text-[#d1c5b4]/60 hover:text-[#e5e1e4]"
-                                }`}
-                            >
-                                <Lock className="w-3.5 h-3.5" />
-                                Password
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => { setMode("otp"); setError(null); }}
-                                className={`flex-1 py-4 text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all ${
-                                    mode === "otp"
-                                        ? "bg-[#201f21] text-[#e8c17b] border-b-2 border-[#e8c17b]"
-                                        : "text-[#d1c5b4]/60 hover:text-[#e5e1e4]"
-                                }`}
-                            >
+                            <div className="flex-1 py-4 text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 bg-[#201f21] text-[#e8c17b] border-b-2 border-[#e8c17b]">
                                 <Sparkles className="w-3.5 h-3.5" />
-                                Passwordless / OTP
-                            </button>
+                                Email Verification
+                            </div>
                         </div>
                     )}
 
@@ -279,186 +203,98 @@ export default function SignupPage() {
                                 <div className="relative flex items-center justify-center my-4">
                                     <div className="border-t border-[#9a8f80]/15 w-full" />
                                     <span className="bg-[#16151A] px-3 text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest absolute">
-                                        or register with {mode === "password" ? "email" : "otp"}
+                                        or register with email
                                     </span>
                                 </div>
 
-                                {mode === "password" ? (
-                                    /* --- PASSWORD SIGNUP FORM --- */
-                                    <form onSubmit={handleEmailSignup} className="space-y-5">
-                                        {error && (
-                                            <div className="bg-[#690005]/40 border border-[#ffb4ab]/30 text-[#ffb4ab] p-3.5 rounded-xl text-xs">
-                                                {error}
-                                            </div>
-                                        )}
-
-                                        <div>
-                                            <label className="block text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest mb-1.5" htmlFor="full-name">
-                                                Full Name
-                                            </label>
-                                            <input
-                                                id="full-name"
-                                                type="text"
-                                                value={fullName}
-                                                onChange={(e) => { setFullName(e.target.value); setError(null); }}
-                                                placeholder="e.g. Eleanor Vance"
-                                                className="form-input text-sm text-[#e5e1e4] placeholder:text-[#d1c5b4]/30"
-                                            />
+                                {/* --- EMAIL + OTP SIGNUP FORM --- */}
+                                <div className="space-y-5">
+                                    {error && (
+                                        <div className="bg-[#690005]/40 border border-[#ffb4ab]/30 text-[#ffb4ab] p-3.5 rounded-xl text-xs">
+                                            {error}
                                         </div>
+                                    )}
 
-                                        <div>
-                                            <label className="block text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest mb-1.5" htmlFor="signup-email">
-                                                Email Address
-                                            </label>
-                                            <input
-                                                id="signup-email"
-                                                type="email"
-                                                value={email}
-                                                onChange={(e) => { setEmail(e.target.value); setError(null); }}
-                                                required
-                                                placeholder="client@wearaura.com"
-                                                className="form-input text-sm text-[#e5e1e4] placeholder:text-[#d1c5b4]/30"
-                                            />
-                                        </div>
-
-                                        <div>
-                                            <label className="block text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest mb-1.5" htmlFor="signup-password">
-                                                Password (min. 6 characters)
-                                            </label>
-                                            <div className="relative">
+                                    {!otpSent ? (
+                                        <form onSubmit={handleSendOtp} className="space-y-5">
+                                            <div>
+                                                <label className="block text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest mb-1.5" htmlFor="signup-email">
+                                                    Email Address
+                                                </label>
                                                 <input
-                                                    id="signup-password"
-                                                    type={showPassword ? "text" : "password"}
-                                                    value={password}
-                                                    onChange={(e) => { setPassword(e.target.value); setError(null); }}
+                                                    id="signup-email"
+                                                    type="email"
+                                                    value={email}
+                                                    onChange={(e) => { setEmail(e.target.value); setError(null); }}
                                                     required
-                                                    minLength={6}
-                                                    placeholder="••••••••"
-                                                    className="form-input text-sm text-[#e5e1e4] pr-10 placeholder:text-[#d1c5b4]/30"
+                                                    placeholder="client@wearaura.com"
+                                                    className="form-input text-sm text-[#e5e1e4] placeholder:text-[#d1c5b4]/30"
                                                 />
+                                            </div>
+
+                                            <button
+                                                type="submit"
+                                                disabled={loading}
+                                                className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[#c9a461] text-[#412d00] text-xs font-semibold uppercase tracking-widest rounded-full hover:bg-[#e8c17b] transition-all duration-300 aura-glow disabled:opacity-50 mt-2"
+                                            >
+                                                {loading ? "Sending Code…" : "Send Verification Code"}
+                                                {!loading && <Mail className="w-4 h-4" />}
+                                            </button>
+                                        </form>
+                                    ) : (
+                                        <form onSubmit={handleVerifyOtp} className="space-y-5">
+                                            <div className="p-4 rounded-xl bg-[#201f21] border border-[#9a8f80]/15 text-xs text-[#d1c5b4] flex items-center justify-between">
+                                                <span className="truncate">{email}</span>
                                                 <button
                                                     type="button"
-                                                    onClick={() => setShowPassword(!showPassword)}
-                                                    className="absolute right-0 top-1/2 -translate-y-1/2 text-[#d1c5b4]/50 hover:text-[#e8c17b] transition-colors p-1"
+                                                    onClick={() => { setOtpSent(false); setOtpCode(""); }}
+                                                    className="text-[#e8c17b] hover:underline text-[11px] font-medium ml-2 shrink-0"
                                                 >
-                                                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                                                    Change
                                                 </button>
                                             </div>
-                                        </div>
 
-                                        <button
-                                            type="submit"
-                                            disabled={loading}
-                                            className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[#c9a461] text-[#412d00] text-xs font-semibold uppercase tracking-widest rounded-full hover:bg-[#e8c17b] transition-all duration-300 aura-glow disabled:opacity-50 mt-2"
-                                        >
-                                            {loading ? "Creating Profile…" : "Create Account"}
-                                            {!loading && <ArrowRight className="w-4 h-4" />}
-                                        </button>
-                                    </form>
-                                ) : (
-                                    /* --- OTP SIGNUP FORM --- */
-                                    <div className="space-y-5">
-                                        {error && (
-                                            <div className="bg-[#690005]/40 border border-[#ffb4ab]/30 text-[#ffb4ab] p-3.5 rounded-xl text-xs">
-                                                {error}
+                                            <div>
+                                                <label className="block text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest mb-1.5" htmlFor="otp-code">
+                                                    6-Digit Verification Code
+                                                </label>
+                                                <input
+                                                    id="otp-code"
+                                                    type="text"
+                                                    value={otpCode}
+                                                    onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                                                    required
+                                                    placeholder="123456"
+                                                    className="form-input text-center text-xl tracking-[0.4em] font-mono text-[#e8c17b]"
+                                                />
                                             </div>
-                                        )}
 
-                                        {!otpSent ? (
-                                            <form onSubmit={handleSendOtp} className="space-y-5">
-                                                <div>
-                                                    <label className="block text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest mb-1.5" htmlFor="otp-fullname">
-                                                        Full Name
-                                                    </label>
-                                                    <input
-                                                        id="otp-fullname"
-                                                        type="text"
-                                                        value={fullName}
-                                                        onChange={(e) => { setFullName(e.target.value); setError(null); }}
-                                                        placeholder="e.g. Eleanor Vance"
-                                                        className="form-input text-sm text-[#e5e1e4] placeholder:text-[#d1c5b4]/30"
-                                                    />
-                                                </div>
+                                            <button
+                                                type="submit"
+                                                disabled={loading || otpCode.length < 6}
+                                                className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[#c9a461] text-[#412d00] text-xs font-semibold uppercase tracking-widest rounded-full hover:bg-[#e8c17b] transition-all duration-300 aura-glow disabled:opacity-50"
+                                            >
+                                                {loading ? "Verifying…" : "Complete Registration"}
+                                            </button>
 
-                                                <div>
-                                                    <label className="block text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest mb-1.5" htmlFor="otp-email">
-                                                        Email Address
-                                                    </label>
-                                                    <input
-                                                        id="otp-email"
-                                                        type="email"
-                                                        value={email}
-                                                        onChange={(e) => { setEmail(e.target.value); setError(null); }}
-                                                        required
-                                                        placeholder="client@wearaura.com"
-                                                        className="form-input text-sm text-[#e5e1e4] placeholder:text-[#d1c5b4]/30"
-                                                    />
-                                                </div>
-
-                                                <button
-                                                    type="submit"
-                                                    disabled={loading}
-                                                    className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[#c9a461] text-[#412d00] text-xs font-semibold uppercase tracking-widest rounded-full hover:bg-[#e8c17b] transition-all duration-300 aura-glow disabled:opacity-50 mt-2"
-                                                >
-                                                    {loading ? "Sending Code…" : "Send Verification Code"}
-                                                    {!loading && <Mail className="w-4 h-4" />}
-                                                </button>
-                                            </form>
-                                        ) : (
-                                            <form onSubmit={handleVerifyOtp} className="space-y-5">
-                                                <div className="p-4 rounded-xl bg-[#201f21] border border-[#9a8f80]/15 text-xs text-[#d1c5b4] flex items-center justify-between">
-                                                    <span className="truncate">{email}</span>
+                                            <div className="text-center pt-2">
+                                                {countdown > 0 ? (
+                                                    <span className="text-xs text-[#9a8f80]">
+                                                        Resend code in {countdown}s
+                                                    </span>
+                                                ) : (
                                                     <button
                                                         type="button"
-                                                        onClick={() => { setOtpSent(false); setOtpCode(""); }}
-                                                        className="text-[#e8c17b] hover:underline text-[11px] font-medium ml-2 shrink-0"
+                                                        onClick={handleSendOtp}
+                                                        className="text-xs text-[#e8c17b] hover:underline inline-flex items-center gap-1"
                                                     >
-                                                        Change
+                                                        <RefreshCw className="w-3 h-3" /> Resend Code
                                                     </button>
-                                                </div>
-
-                                                <div>
-                                                    <label className="block text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest mb-1.5" htmlFor="otp-code">
-                                                        6-Digit Verification Code
-                                                    </label>
-                                                    <input
-                                                        id="otp-code"
-                                                        type="text"
-                                                        value={otpCode}
-                                                        onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                                                        required
-                                                        placeholder="123456"
-                                                        className="form-input text-center text-xl tracking-[0.4em] font-mono text-[#e8c17b]"
-                                                    />
-                                                </div>
-
-                                                <button
-                                                    type="submit"
-                                                    disabled={loading || otpCode.length < 6}
-                                                    className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[#c9a461] text-[#412d00] text-xs font-semibold uppercase tracking-widest rounded-full hover:bg-[#e8c17b] transition-all duration-300 aura-glow disabled:opacity-50"
-                                                >
-                                                    {loading ? "Verifying…" : "Complete Registration"}
-                                                </button>
-
-                                                <div className="text-center pt-2">
-                                                    {countdown > 0 ? (
-                                                        <span className="text-xs text-[#9a8f80]">
-                                                            Resend code in {countdown}s
-                                                        </span>
-                                                    ) : (
-                                                        <button
-                                                            type="button"
-                                                            onClick={handleSendOtp}
-                                                            className="text-xs text-[#e8c17b] hover:underline inline-flex items-center gap-1"
-                                                        >
-                                                            <RefreshCw className="w-3 h-3" /> Resend Code
-                                                        </button>
-                                                    )}
-                                                </div>
-                                            </form>
-                                        )}
-                                    </div>
-                                )}
+                                                )}
+                                            </div>
+                                        </form>
+                                    )}
+                                </div>
                             </div>
                         )}
                     </div>

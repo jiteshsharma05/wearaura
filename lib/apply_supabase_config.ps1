@@ -89,5 +89,5 @@ Apply-Template "Reset Password"    "recovery"       "Reset your WearAura passwor
 Apply-Template "Change Email"      "email_change"   "Confirm email address change — WearAura"       $t4
 
 Write-Host "`n[DONE] All templates applied. Now test the OTP flow at your app." -ForegroundColor Green
-Write-Host "  Signup OTP: http://localhost:3000/signup  (Passwordless/OTP tab)" -ForegroundColor Cyan
+Write-Host "  Signup OTP: http://localhost:3000/signup  (6-Digit OTP Signup)" -ForegroundColor Cyan
 Write-Host "  Login OTP:  http://localhost:3000/login   (OTP/Magic Link tab)"   -ForegroundColor Cyan
