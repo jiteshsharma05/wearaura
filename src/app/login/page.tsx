@@ -125,32 +125,32 @@ export default function LoginPage() {
     };
 
     return (
-        <main className="min-h-screen bg-[#131315] text-[#e5e1e4] flex items-center justify-center py-24 px-6 relative overflow-hidden">
+        <main className="min-h-screen bg-[#F7F4EE] text-[#282421] flex items-center justify-center py-24 px-6 relative overflow-hidden">
             {/* Ambient Background Glow */}
-            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-radial from-[#e8c17b]/10 to-transparent blur-3xl pointer-events-none" />
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-radial from-[#5B3C58]/10 to-transparent blur-3xl pointer-events-none" />
 
             <div className="w-full max-w-md relative z-10">
                 {/* Brand Header */}
                 <div className="text-center mb-8 space-y-2">
                     <Link href="/" className="inline-block group">
-                        <span className="text-xs uppercase tracking-[0.3em] text-[#e8c17b] font-medium block">
+                        <span className="text-xs uppercase tracking-[0.3em] text-[#5B3C58] font-medium block">
                             Haute Parfumerie
                         </span>
-                        <h1 className="text-3xl sm:text-4xl font-serif text-[#e5e1e4] tracking-wide mt-1">
+                        <h1 className="text-3xl sm:text-4xl font-serif text-[#282421] tracking-wide mt-1">
                             WearAura
                         </h1>
                     </Link>
-                    <p className="text-xs text-[#d1c5b4]/80 tracking-widest uppercase">
+                    <p className="text-xs text-[#817B73]/80 tracking-widest uppercase">
                         Client Boutique Portal
                     </p>
                 </div>
 
                 {/* Main Glass Card */}
-                <div className="glass-card rounded-2xl overflow-hidden border border-[#9a8f80]/15 shadow-2xl">
+                <div className="glass-card rounded-2xl overflow-hidden border border-[#817B73]/15 shadow-2xl">
                     {/* Header bar (Single mode — Email Code) */}
                     {!success && (
-                        <div className="flex border-b border-[#9a8f80]/15 bg-[#0e0e10]/60">
-                            <div className="flex-1 py-4 text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 bg-[#201f21] text-[#e8c17b] border-b-2 border-[#e8c17b]">
+                        <div className="flex border-b border-[#817B73]/15 bg-[#302831]/60">
+                            <div className="flex-1 py-4 text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 bg-[#E5DFD7] text-[#5B3C58] border-b-2 border-[#5B3C58]">
                                 <KeyRound className="w-3.5 h-3.5" />
                                 Email Code
                             </div>
@@ -164,8 +164,8 @@ export default function LoginPage() {
                                     <CheckCircle2 className="w-8 h-8" />
                                 </div>
                                 <div>
-                                    <p className="text-2xl font-serif text-[#e5e1e4] mb-2">{successMessage}</p>
-                                    <p className="text-xs text-[#d1c5b4]/70 tracking-widest uppercase">Entering your sanctuary…</p>
+                                    <p className="text-2xl font-serif text-[#282421] mb-2">{successMessage}</p>
+                                    <p className="text-xs text-[#817B73]/70 tracking-widest uppercase">Entering your sanctuary…</p>
                                 </div>
                             </div>
                         ) : (
@@ -176,7 +176,7 @@ export default function LoginPage() {
                                         type="button"
                                         onClick={handleGoogleLogin}
                                         disabled={loading}
-                                        className="w-full flex items-center justify-center gap-3 py-3.5 px-4 rounded-xl border border-[#9a8f80]/20 bg-[#201f21]/80 hover:bg-[#2a2a2c] hover:border-[#e8c17b]/40 text-[#e5e1e4] text-xs uppercase tracking-wider font-semibold transition-all shadow-sm active:scale-[0.99] disabled:opacity-50 cursor-pointer"
+                                        className="w-full flex items-center justify-center gap-3 py-3.5 px-4 rounded-xl border border-[#817B73]/20 bg-[#E5DFD7]/80 hover:bg-[#DCD5CC] hover:border-[#5B3C58]/40 text-[#282421] text-xs uppercase tracking-wider font-semibold transition-all shadow-sm active:scale-[0.99] disabled:opacity-50 cursor-pointer"
                                     >
                                         <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24">
                                             <path
@@ -201,8 +201,8 @@ export default function LoginPage() {
                                 </div>
 
                                 <div className="relative flex items-center justify-center my-4">
-                                    <div className="border-t border-[#9a8f80]/15 w-full" />
-                                    <span className="bg-[#16151A] px-3 text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest absolute">
+                                    <div className="border-t border-[#817B73]/15 w-full" />
+                                    <span className="bg-[#F0ECE4] px-3 text-[10px] font-semibold text-[#817B73] uppercase tracking-widest absolute">
                                         or continue with email code
                                     </span>
                                 </div>
@@ -210,7 +210,7 @@ export default function LoginPage() {
                                 {/* --- OTP LOGIN FORM --- */}
                                 <div className="space-y-5">
                                     {error && (
-                                        <div className="bg-[#690005]/40 border border-[#ffb4ab]/30 text-[#ffb4ab] p-3.5 rounded-xl text-xs">
+                                        <div className="bg-[#FFF5F5]/40 border border-[#C53030]/30 text-[#C53030] p-3.5 rounded-xl text-xs">
                                             {error}
                                         </div>
                                     )}
@@ -218,7 +218,7 @@ export default function LoginPage() {
                                     {!otpSent ? (
                                         <form onSubmit={handleSendOtp} className="space-y-5">
                                             <div>
-                                                <label className="block text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest mb-1.5" htmlFor="otp-email">
+                                                <label className="block text-[10px] font-semibold text-[#817B73] uppercase tracking-widest mb-1.5" htmlFor="otp-email">
                                                     Email Address
                                                 </label>
                                                 <input
@@ -228,14 +228,14 @@ export default function LoginPage() {
                                                     onChange={(e) => { setEmail(e.target.value); setError(null); }}
                                                     required
                                                     placeholder="client@wearaura.com"
-                                                    className="form-input text-sm text-[#e5e1e4] placeholder:text-[#d1c5b4]/30"
+                                                    className="form-input text-sm text-[#282421] placeholder:text-[#817B73]/30"
                                                 />
                                             </div>
 
                                             <button
                                                 type="submit"
                                                 disabled={loading}
-                                                className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[#c9a461] text-[#412d00] text-xs font-semibold uppercase tracking-widest rounded-full hover:bg-[#e8c17b] transition-all duration-300 aura-glow disabled:opacity-50 mt-2"
+                                                className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[#4A2E47] text-[#F7F4EE] text-xs font-semibold uppercase tracking-widest rounded-full hover:bg-[#5B3C58] transition-all duration-300 aura-glow disabled:opacity-50 mt-2"
                                             >
                                                 {loading ? "Sending Code…" : "Send Verification Code"}
                                                 {!loading && <Mail className="w-4 h-4" />}
@@ -243,19 +243,19 @@ export default function LoginPage() {
                                         </form>
                                     ) : (
                                         <form onSubmit={handleVerifyOtp} className="space-y-5">
-                                            <div className="p-4 rounded-xl bg-[#201f21] border border-[#9a8f80]/15 text-xs text-[#d1c5b4] flex items-center justify-between">
+                                            <div className="p-4 rounded-xl bg-[#E5DFD7] border border-[#817B73]/15 text-xs text-[#817B73] flex items-center justify-between">
                                                 <span className="truncate">{email}</span>
                                                 <button
                                                     type="button"
                                                     onClick={() => { setOtpSent(false); setOtpCode(""); }}
-                                                    className="text-[#e8c17b] hover:underline text-[11px] font-medium ml-2 shrink-0"
+                                                    className="text-[#5B3C58] hover:underline text-[11px] font-medium ml-2 shrink-0"
                                                 >
                                                     Change
                                                 </button>
                                             </div>
 
                                             <div>
-                                                <label className="block text-[10px] font-semibold text-[#9a8f80] uppercase tracking-widest mb-1.5" htmlFor="otp-code">
+                                                <label className="block text-[10px] font-semibold text-[#817B73] uppercase tracking-widest mb-1.5" htmlFor="otp-code">
                                                     6-Digit Verification Code
                                                 </label>
                                                 <input
@@ -265,28 +265,28 @@ export default function LoginPage() {
                                                     onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
                                                     required
                                                     placeholder="123456"
-                                                    className="form-input text-center text-xl tracking-[0.4em] font-mono text-[#e8c17b]"
+                                                    className="form-input text-center text-xl tracking-[0.4em] font-mono text-[#5B3C58]"
                                                 />
                                             </div>
 
                                             <button
                                                 type="submit"
                                                 disabled={loading || otpCode.length < 6}
-                                                className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[#c9a461] text-[#412d00] text-xs font-semibold uppercase tracking-widest rounded-full hover:bg-[#e8c17b] transition-all duration-300 aura-glow disabled:opacity-50"
+                                                className="w-full inline-flex items-center justify-center gap-2 py-4 bg-[#4A2E47] text-[#F7F4EE] text-xs font-semibold uppercase tracking-widest rounded-full hover:bg-[#5B3C58] transition-all duration-300 aura-glow disabled:opacity-50"
                                             >
                                                 {loading ? "Verifying…" : "Confirm & Sign In"}
                                             </button>
 
                                             <div className="text-center pt-2">
                                                 {countdown > 0 ? (
-                                                    <span className="text-xs text-[#9a8f80]">
+                                                    <span className="text-xs text-[#817B73]">
                                                         Resend code in {countdown}s
                                                     </span>
                                                 ) : (
                                                     <button
                                                         type="button"
                                                         onClick={handleSendOtp}
-                                                        className="text-xs text-[#e8c17b] hover:underline inline-flex items-center gap-1"
+                                                        className="text-xs text-[#5B3C58] hover:underline inline-flex items-center gap-1"
                                                     >
                                                         <RefreshCw className="w-3 h-3" /> Resend Code
                                                     </button>
@@ -300,9 +300,9 @@ export default function LoginPage() {
                     </div>
 
                     {/* Bottom Registration Link */}
-                    <div className="p-6 bg-[#0e0e10]/60 border-t border-[#9a8f80]/15 text-center text-xs text-[#d1c5b4]/80">
+                    <div className="p-6 bg-[#302831]/60 border-t border-[#817B73]/15 text-center text-xs text-[#817B73]/80">
                         Don&apos;t have an account?{" "}
-                        <Link href="/signup" className="text-[#e8c17b] hover:underline font-medium">
+                        <Link href="/signup" className="text-[#5B3C58] hover:underline font-medium">
                             Create an Account
                         </Link>
                     </div>

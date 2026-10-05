@@ -188,7 +188,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-[#131315] text-[#e5e1e4] min-h-screen">
+    <div className="bg-[#F7F4EE] text-[#282421] min-h-screen">
       {/* 1. HERO SECTION (Maison Home) */}
       <section className="relative w-full h-[85vh] min-h-[580px] flex flex-col justify-end items-center pb-20 px-6 text-center overflow-hidden">
         {/* Background Image & Gradient */}
@@ -209,7 +209,7 @@ export default function Home() {
               />
             </motion.div>
           </AnimatePresence>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#131315] via-[#131315]/65 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#F7F4EE] via-[#F7F4EE]/65 to-transparent"></div>
         </div>
 
         {/* Hero Content */}
@@ -218,7 +218,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-xs uppercase tracking-[0.3em] text-[#e8c17b] font-medium"
+            className="text-xs uppercase tracking-[0.3em] text-[#5B3C58] font-medium"
           >
             WearAura Fragrance
           </motion.span>
@@ -228,7 +228,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#e5e1e4] leading-[1.15]"
+            className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#282421] leading-[1.15]"
           >
             {currentHero.title || "The Art of Invisible Presence"}
           </motion.h1>
@@ -238,7 +238,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-sm md:text-base text-[#d1c5b4] max-w-md leading-relaxed"
+            className="text-sm md:text-base text-[#817B73] max-w-md leading-relaxed"
           >
             {currentHero.subtitle ||
               "Handcrafted haute parfumerie capturing rare botanical distillations for a magnetic sillage."}
@@ -252,7 +252,7 @@ export default function Home() {
           >
             <Link
               href={currentHero.button_link || "#collection"}
-              className="inline-flex items-center justify-center gap-2 bg-[#c9a461] text-[#412d00] px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-widest hover:bg-[#e8c17b] transition-all duration-300 aura-glow"
+              className="inline-flex items-center justify-center gap-2 bg-[#4A2E47] text-[#F7F4EE] px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-widest hover:bg-[#5B3C58] transition-all duration-300 aura-glow"
             >
               <span>{currentHero.button_text || "Explore The Collection"}</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -268,8 +268,8 @@ export default function Home() {
                   onClick={() => setCurrentSlide(idx)}
                   className={`h-1 transition-all rounded-full ${
                     idx === currentSlide
-                      ? "w-8 bg-[#e8c17b]"
-                      : "w-2 bg-[#9a8f80]/40 hover:bg-[#9a8f80]"
+                      ? "w-8 bg-[#5B3C58]"
+                      : "w-2 bg-[#817B73]/40 hover:bg-[#817B73]"
                   }`}
                   aria-label={`Go to slide ${idx + 1}`}
                 />
@@ -282,13 +282,13 @@ export default function Home() {
       {/* 2. THE COLLECTION SECTION */}
       <section className="py-24 px-6 max-w-[1400px] mx-auto" id="collection">
         <div className="text-center mb-16 space-y-3">
-          <span className="text-xs font-medium text-[#e8c17b] tracking-[0.3em] uppercase block">
+          <span className="text-xs font-medium text-[#5B3C58] tracking-[0.3em] uppercase block">
             Curated Selection
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#e5e1e4]">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#282421]">
             The Collection
           </h2>
-          <p className="text-sm md:text-base text-[#d1c5b4] max-w-lg mx-auto leading-relaxed">
+          <p className="text-sm md:text-base text-[#817B73] max-w-lg mx-auto leading-relaxed">
             Formulated in concentrated extraits with notes that unfold gracefully over time.
           </p>
         </div>
@@ -301,11 +301,11 @@ export default function Home() {
                 key={n}
                 className="glass-panel p-6 rounded-2xl h-96 animate-pulse flex flex-col justify-between"
               >
-                <div className="w-16 h-4 bg-[#2a2a2c] rounded"></div>
-                <div className="w-full h-40 bg-[#201f21] rounded"></div>
+                <div className="w-16 h-4 bg-[#DCD5CC] rounded"></div>
+                <div className="w-full h-40 bg-[#E5DFD7] rounded"></div>
                 <div className="space-y-2">
-                  <div className="w-3/4 h-5 bg-[#2a2a2c] rounded"></div>
-                  <div className="w-1/2 h-4 bg-[#201f21] rounded"></div>
+                  <div className="w-3/4 h-5 bg-[#DCD5CC] rounded"></div>
+                  <div className="w-1/2 h-4 bg-[#E5DFD7] rounded"></div>
                 </div>
               </div>
             ))}
@@ -324,19 +324,19 @@ export default function Home() {
                 >
                   {/* Top Row: Category Badge & Wishlist */}
                   <div className="flex justify-between items-start mb-4">
-                    <span className="text-[10px] tracking-widest uppercase text-[#e8c17b] border border-[#e8c17b]/30 px-2 py-0.5 rounded font-mono">
+                    <span className="text-[10px] tracking-widest uppercase text-[#5B3C58] border border-[#5B3C58]/30 px-2 py-0.5 rounded font-mono">
                       {product.category || "Unisex"}
                     </span>
                     <button
                       onClick={(e) => toggleWishlist(product.id, e)}
                       aria-label="Wishlist"
-                      className="text-[#d1c5b4] hover:text-[#e8c17b] transition-colors p-1"
+                      className="text-[#817B73] hover:text-[#5B3C58] transition-colors p-1"
                     >
                       <Heart
                         className={`w-4 h-4 ${
                           isFav
-                            ? "fill-[#e8c17b] text-[#e8c17b]"
-                            : "text-[#d1c5b4] stroke-[1.5px]"
+                            ? "fill-[#5B3C58] text-[#5B3C58]"
+                            : "text-[#817B73] stroke-[1.5px]"
                         }`}
                       />
                     </button>
@@ -351,14 +351,14 @@ export default function Home() {
                         className="w-full h-full object-contain mix-blend-screen opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-[#d1c5b4]/40 font-serif italic">
+                      <div className="w-full h-full flex items-center justify-center text-[#817B73]/40 font-serif italic">
                         WearAura Flacon
                       </div>
                     )}
 
                     {isSoldOut && (
-                      <div className="absolute inset-0 bg-[#131315]/80 backdrop-blur-xs flex items-center justify-center rounded-lg">
-                        <span className="text-[10px] uppercase tracking-widest text-[#ffb4ab] border border-[#ffb4ab]/40 px-3 py-1 rounded">
+                      <div className="absolute inset-0 bg-[#F7F4EE]/80 backdrop-blur-xs flex items-center justify-center rounded-lg">
+                        <span className="text-[10px] uppercase tracking-widest text-[#C53030] border border-[#C53030]/40 px-3 py-1 rounded">
                           Sold Out
                         </span>
                       </div>
@@ -367,14 +367,14 @@ export default function Home() {
 
                   {/* Bottom Info */}
                   <div className="mt-auto">
-                    <h3 className="text-lg font-serif text-[#e5e1e4] group-hover:text-[#e8c17b] transition-colors mb-1 truncate">
+                    <h3 className="text-lg font-serif text-[#282421] group-hover:text-[#5B3C58] transition-colors mb-1 truncate">
                       {product.name}
                     </h3>
                     <div className="flex justify-between items-center mt-2">
-                      <span className="text-sm font-semibold text-[#e8c17b]">
+                      <span className="text-sm font-semibold text-[#5B3C58]">
                         ₹{Number(product.price).toFixed(2)}
                       </span>
-                      <span className="text-xs text-[#d1c5b4] group-hover:text-[#e8c17b] transition-colors flex items-center gap-1 font-medium">
+                      <span className="text-xs text-[#817B73] group-hover:text-[#5B3C58] transition-colors flex items-center gap-1 font-medium">
                         Details <ChevronRight className="w-3.5 h-3.5" />
                       </span>
                     </div>
@@ -385,10 +385,10 @@ export default function Home() {
           </div>
         ) : (
           <div className="text-center py-16 glass-panel rounded-2xl p-12 max-w-xl mx-auto">
-            <p className="text-[#d1c5b4] mb-4">No fragrances currently cataloged.</p>
+            <p className="text-[#817B73] mb-4">No fragrances currently cataloged.</p>
             <Link
               href="/admin"
-              className="inline-block text-xs uppercase tracking-widest text-[#e8c17b] border-b border-[#e8c17b]/40 pb-1"
+              className="inline-block text-xs uppercase tracking-widest text-[#5B3C58] border-b border-[#5B3C58]/40 pb-1"
             >
               Add First Fragrance
             </Link>
@@ -399,7 +399,7 @@ export default function Home() {
         <div className="mt-16 text-center">
           <Link
             href="/#collection"
-            className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.25em] uppercase text-[#d1c5b4] hover:text-[#e8c17b] transition-colors pb-1 border-b border-[#9a8f80]/30 hover:border-[#e8c17b]"
+            className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.25em] uppercase text-[#817B73] hover:text-[#5B3C58] transition-colors pb-1 border-b border-[#817B73]/30 hover:border-[#5B3C58]"
           >
             <span>View Full Anthology</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -408,18 +408,18 @@ export default function Home() {
       </section>
 
       {/* 3. PHILOSOPHY / ARCHITECTURE OF SCENT SECTION */}
-      <section className="py-24 px-6 bg-[#1c1b1d]/40 border-y border-[#9a8f80]/10 relative">
+      <section className="py-24 px-6 bg-[#EDE8E0]/40 border-y border-[#817B73]/10 relative">
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <div className="w-12 h-12 rounded-full border border-[#e8c17b]/30 flex items-center justify-center mx-auto mb-6 text-[#e8c17b]">
+          <div className="w-12 h-12 rounded-full border border-[#5B3C58]/30 flex items-center justify-center mx-auto mb-6 text-[#5B3C58]">
             <Compass className="w-6 h-6 stroke-[1.5px]" />
           </div>
-          <span className="text-xs font-medium text-[#e8c17b] tracking-[0.3em] uppercase mb-3 block">
+          <span className="text-xs font-medium text-[#5B3C58] tracking-[0.3em] uppercase mb-3 block">
             The Architecture of Scent
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#e5e1e4] mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#282421] mb-6">
             Wear Your Aura
           </h2>
-          <p className="text-base md:text-lg text-[#d1c5b4] leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-[#817B73] leading-relaxed max-w-2xl mx-auto">
             A bespoke fragrance is not merely an accessory — it is an invisible architecture
             that harmonizes with your body heat, creating an unmistakable presence.
           </p>
@@ -429,11 +429,11 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1300px] mx-auto">
           {/* Card 1: Longevity */}
           <div className="glass-panel p-8 rounded-2xl text-center flex flex-col items-center">
-            <div className="w-12 h-12 rounded-full border border-[#e8c17b]/20 flex items-center justify-center mb-6 text-[#e8c17b]">
+            <div className="w-12 h-12 rounded-full border border-[#5B3C58]/20 flex items-center justify-center mb-6 text-[#5B3C58]">
               <Clock className="w-5 h-5 stroke-[1.5px]" />
             </div>
-            <h3 className="text-xl font-serif text-[#e5e1e4] mb-3">Profound Longevity</h3>
-            <p className="text-sm text-[#d1c5b4]/80 leading-relaxed">
+            <h3 className="text-xl font-serif text-[#282421] mb-3">Profound Longevity</h3>
+            <p className="text-sm text-[#817B73]/80 leading-relaxed">
               High-concentration formulation engineered to release layers smoothly across
               12+ hours of wear.
             </p>
@@ -441,11 +441,11 @@ export default function Home() {
 
           {/* Card 2: Rare Distillations */}
           <div className="glass-panel p-8 rounded-2xl text-center flex flex-col items-center">
-            <div className="w-12 h-12 rounded-full border border-[#e8c17b]/20 flex items-center justify-center mb-6 text-[#e8c17b]">
+            <div className="w-12 h-12 rounded-full border border-[#5B3C58]/20 flex items-center justify-center mb-6 text-[#5B3C58]">
               <Sparkles className="w-5 h-5 stroke-[1.5px]" />
             </div>
-            <h3 className="text-xl font-serif text-[#e5e1e4] mb-3">Rare Distillations</h3>
-            <p className="text-sm text-[#d1c5b4]/80 leading-relaxed">
+            <h3 className="text-xl font-serif text-[#282421] mb-3">Rare Distillations</h3>
+            <p className="text-sm text-[#817B73]/80 leading-relaxed">
               Harvested from ethical botanical estates worldwide: Grasse roses, Mysore
               sandalwood, and ambergris.
             </p>
@@ -453,11 +453,11 @@ export default function Home() {
 
           {/* Card 3: Artisanal Mastery */}
           <div className="glass-panel p-8 rounded-2xl text-center flex flex-col items-center">
-            <div className="w-12 h-12 rounded-full border border-[#e8c17b]/20 flex items-center justify-center mb-6 text-[#e8c17b]">
+            <div className="w-12 h-12 rounded-full border border-[#5B3C58]/20 flex items-center justify-center mb-6 text-[#5B3C58]">
               <ShieldCheck className="w-5 h-5 stroke-[1.5px]" />
             </div>
-            <h3 className="text-xl font-serif text-[#e5e1e4] mb-3">Artisanal Mastery</h3>
-            <p className="text-sm text-[#d1c5b4]/80 leading-relaxed">
+            <h3 className="text-xl font-serif text-[#282421] mb-3">Artisanal Mastery</h3>
+            <p className="text-sm text-[#817B73]/80 leading-relaxed">
               Matured in small numbered batches to preserve purity, depth, and nuanced
               complexity on the skin.
             </p>
@@ -467,19 +467,19 @@ export default function Home() {
 
       {/* 4. CONCIERGE CTA SECTION */}
       <section className="py-28 px-6 text-center max-w-3xl mx-auto">
-        <span className="text-xs font-medium text-[#e8c17b] tracking-[0.3em] uppercase mb-4 block">
+        <span className="text-xs font-medium text-[#5B3C58] tracking-[0.3em] uppercase mb-4 block">
           Client Services
         </span>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#e5e1e4] mb-6">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#282421] mb-6">
           Seeking Your Personal Aura?
         </h2>
-        <p className="text-sm md:text-base text-[#d1c5b4] max-w-md mx-auto mb-10 leading-relaxed">
+        <p className="text-sm md:text-base text-[#817B73] max-w-md mx-auto mb-10 leading-relaxed">
           Our fragrance specialists are at your disposal to guide you towards a scent that
           matches your distinct profile.
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center justify-center gap-2 bg-transparent border border-[#e8c17b] text-[#e8c17b] px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-widest hover:bg-[#e8c17b]/10 transition-colors"
+          className="inline-flex items-center justify-center gap-2 bg-transparent border border-[#5B3C58] text-[#5B3C58] px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-widest hover:bg-[#5B3C58]/10 transition-colors"
         >
           <span>Speak With Our Concierge</span>
           <ArrowUpRight className="w-4 h-4" />

@@ -15,14 +15,14 @@ export default function BottomNav() {
   const isProfile = pathname.startsWith("/account") || pathname === "/login" || pathname === "/signup" || pathname === "/my-orders";
 
   return (
-    <nav className="md:hidden bg-[#131315]/90 backdrop-blur-2xl border-t border-[#9a8f80]/15 shadow-2xl fixed bottom-0 left-0 w-full z-40 flex justify-around items-center h-20 px-6 pb-2">
+    <nav className="md:hidden bg-[#F7F4EE]/90 backdrop-blur-2xl border-t border-[#817B73]/15 shadow-2xl fixed bottom-0 left-0 w-full z-40 flex justify-around items-center h-20 px-6 pb-2">
       {/* Home */}
       <Link
         href="/"
         className={`flex flex-col items-center justify-center relative p-2 transition-all duration-300 ${
           isHome
-            ? "text-[#e8c17b] scale-105 after:content-[''] after:absolute after:bottom-0 after:w-1 after:h-1 after:bg-[#e8c17b] after:rounded-full"
-            : "text-[#d1c5b4]/60 hover:text-[#e8c17b]"
+            ? "text-[#5B3C58] scale-105 after:content-[''] after:absolute after:bottom-0 after:w-1 after:h-1 after:bg-[#5B3C58] after:rounded-full"
+            : "text-[#817B73]/60 hover:text-[#5B3C58]"
         }`}
         aria-label="Home"
       >
@@ -35,8 +35,8 @@ export default function BottomNav() {
         href="/#collection"
         className={`flex flex-col items-center justify-center relative p-2 transition-all duration-300 ${
           isExplore
-            ? "text-[#e8c17b] scale-105 after:content-[''] after:absolute after:bottom-0 after:w-1 after:h-1 after:bg-[#e8c17b] after:rounded-full"
-            : "text-[#d1c5b4]/60 hover:text-[#e8c17b]"
+            ? "text-[#5B3C58] scale-105 after:content-[''] after:absolute after:bottom-0 after:w-1 after:h-1 after:bg-[#5B3C58] after:rounded-full"
+            : "text-[#817B73]/60 hover:text-[#5B3C58]"
         }`}
         aria-label="Explore Collection"
       >
@@ -49,8 +49,8 @@ export default function BottomNav() {
         href="/about"
         className={`flex flex-col items-center justify-center relative p-2 transition-all duration-300 ${
           isPhilosophy
-            ? "text-[#e8c17b] scale-105 after:content-[''] after:absolute after:bottom-0 after:w-1 after:h-1 after:bg-[#e8c17b] after:rounded-full"
-            : "text-[#d1c5b4]/60 hover:text-[#e8c17b]"
+            ? "text-[#5B3C58] scale-105 after:content-[''] after:absolute after:bottom-0 after:w-1 after:h-1 after:bg-[#5B3C58] after:rounded-full"
+            : "text-[#817B73]/60 hover:text-[#5B3C58]"
         }`}
         aria-label="Our Philosophy"
       >
@@ -63,8 +63,8 @@ export default function BottomNav() {
         href={user ? "/account" : "/login"}
         className={`flex flex-col items-center justify-center relative p-2 transition-all duration-300 ${
           isProfile
-            ? "text-[#e8c17b] scale-105 after:content-[''] after:absolute after:bottom-0 after:w-1 after:h-1 after:bg-[#e8c17b] after:rounded-full"
-            : "text-[#d1c5b4]/60 hover:text-[#e8c17b]"
+            ? "text-[#5B3C58] scale-105 after:content-[''] after:absolute after:bottom-0 after:w-1 after:h-1 after:bg-[#5B3C58] after:rounded-full"
+            : "text-[#817B73]/60 hover:text-[#5B3C58]"
         }`}
         aria-label="Profile"
       >

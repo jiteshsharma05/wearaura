@@ -45,11 +45,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${ebGaramond.variable} ${geist.variable} ${cormorant.variable} ${inter.variable}`}>
-      <body className="font-sans antialiased text-[#e5e1e4] bg-[#131315] selection:bg-[#c9a461]/30 selection:text-[#e5e1e4]">
+    <html lang="en" className={`${ebGaramond.variable} ${geist.variable} ${cormorant.variable} ${inter.variable}`}>
+      <body className="font-sans antialiased text-[#282421] bg-[#F7F4EE] selection:bg-[#5B3C58]/20 selection:text-[#282421]">
         <AuthProvider>
           <CartProvider>
-            <div className="flex min-h-screen flex-col bg-[#131315] text-[#e5e1e4] pb-20 md:pb-0">
+            <div className="flex min-h-screen flex-col bg-[#F7F4EE] text-[#282421] pb-20 md:pb-0">
               <Header />
               <main className="flex-grow">{children}</main>
               <Footer />
@@ -60,23 +60,23 @@ export default function RootLayout({
               toastOptions={{ 
                 duration: 3000,
                 style: {
-                  background: '#16151A',
-                  color: '#e5e1e4',
-                  border: '1px solid rgba(232, 193, 123, 0.25)',
-                  boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.8)',
+                  background: '#F7F4EE',
+                  color: '#282421',
+                  border: '1px solid rgba(40, 36, 33, 0.12)',
+                  boxShadow: '0 4px 20px rgba(40, 36, 33, 0.08)',
                   fontSize: '13px',
                   fontFamily: 'var(--font-inter), sans-serif',
                 },
                 success: {
                   iconTheme: {
-                    primary: '#e8c17b',
-                    secondary: '#131315',
+                    primary: '#5B3C58',
+                    secondary: '#F7F4EE',
                   },
                 },
                 error: {
                   iconTheme: {
-                    primary: '#ffb4ab',
-                    secondary: '#690005',
+                    primary: '#C53030',
+                    secondary: '#FFF5F5',
                   },
                 },
               }} 

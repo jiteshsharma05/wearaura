@@ -13,14 +13,14 @@ export default function Footer() {
     }, []);
 
     return (
-        <footer className="bg-[#0e0e10] border-t border-[#9a8f80]/10 py-16 px-6 text-center flex flex-col items-center gap-6 full-width mb-20 md:mb-0 relative z-20">
+        <footer className="bg-[#302831] border-t border-[#817B73]/10 py-16 px-6 text-center flex flex-col items-center gap-6 full-width mb-20 md:mb-0 relative z-20">
             {/* Brand */}
             <div>
                 <Link href="/" className="inline-block group">
-                    <h2 className="text-[14px] font-semibold uppercase tracking-[0.25em] text-[#e8c17b] transition-colors">
+                    <h2 className="text-[14px] font-semibold uppercase tracking-[0.25em] text-[#5B3C58] transition-colors">
                         WearAura
                     </h2>
-                    <p className="text-[9px] font-medium text-[#d1c5b4]/60 mt-1 tracking-[0.3em] uppercase">
+                    <p className="text-[9px] font-medium text-[#817B73]/60 mt-1 tracking-[0.3em] uppercase">
                         Haute Parfumerie
                     </p>
                 </Link>
@@ -30,44 +30,44 @@ export default function Footer() {
             <div className="flex flex-wrap justify-center gap-6 sm:gap-8 my-2 max-w-2xl">
                 <Link 
                     href="/#collection" 
-                    className="text-[#d1c5b4]/60 hover:text-[#e8c17b] transition-colors text-[11px] uppercase tracking-wider"
+                    className="text-[#817B73]/60 hover:text-[#5B3C58] transition-colors text-[11px] uppercase tracking-wider"
                 >
                     The Collection
                 </Link>
                 <Link 
                     href="/about" 
-                    className="text-[#d1c5b4]/60 hover:text-[#e8c17b] transition-colors text-[11px] uppercase tracking-wider"
+                    className="text-[#817B73]/60 hover:text-[#5B3C58] transition-colors text-[11px] uppercase tracking-wider"
                 >
                     The Philosophy
                 </Link>
                 <Link 
                     href="/contact" 
-                    className="text-[#d1c5b4]/60 hover:text-[#e8c17b] transition-colors text-[11px] uppercase tracking-wider"
+                    className="text-[#817B73]/60 hover:text-[#5B3C58] transition-colors text-[11px] uppercase tracking-wider"
                 >
                     Concierge
                 </Link>
                 <Link 
                     href="/policies/shipping-policy" 
-                    className="text-[#d1c5b4]/60 hover:text-[#e8c17b] transition-colors text-[11px] uppercase tracking-wider"
+                    className="text-[#817B73]/60 hover:text-[#5B3C58] transition-colors text-[11px] uppercase tracking-wider"
                 >
                     Shipping &amp; Returns
                 </Link>
                 <Link 
                     href="/policies/privacy-policy" 
-                    className="text-[#d1c5b4]/60 hover:text-[#e8c17b] transition-colors text-[11px] uppercase tracking-wider"
+                    className="text-[#817B73]/60 hover:text-[#5B3C58] transition-colors text-[11px] uppercase tracking-wider"
                 >
                     Privacy Policy
                 </Link>
                 <Link 
                     href="/policies/terms-and-conditions" 
-                    className="text-[#d1c5b4]/60 hover:text-[#e8c17b] transition-colors text-[11px] uppercase tracking-wider"
+                    className="text-[#817B73]/60 hover:text-[#5B3C58] transition-colors text-[11px] uppercase tracking-wider"
                 >
                     Terms of Service
                 </Link>
                 {mounted && user && (
                     <Link 
                         href="/account" 
-                        className="text-[#d1c5b4]/60 hover:text-[#e8c17b] transition-colors text-[11px] uppercase tracking-wider"
+                        className="text-[#817B73]/60 hover:text-[#5B3C58] transition-colors text-[11px] uppercase tracking-wider"
                     >
                         My Account
                     </Link>
@@ -79,10 +79,10 @@ export default function Footer() {
 
             {/* Copyright & Sub-label */}
             <div className="space-y-1">
-                <p className="text-[#d1c5b4]/40 text-xs font-light">
+                <p className="text-[#817B73]/40 text-xs font-light">
                     &copy; {new Date().getFullYear()} WearAura Haute Parfumerie. All rights reserved.
                 </p>
-                <p className="text-[10px] text-[#d1c5b4]/30 uppercase tracking-[0.25em]">
+                <p className="text-[10px] text-[#817B73]/30 uppercase tracking-[0.25em]">
                     Designed for the Discerning
                 </p>
             </div>

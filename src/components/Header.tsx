@@ -65,18 +65,18 @@ function SidebarMenu({
                             width: "min(85vw, 360px)",
                             zIndex: 9999,
                         }}
-                        className="bg-[#16151A] border-r border-[#9a8f80]/20 shadow-2xl flex flex-col font-sans overflow-y-auto text-[#e5e1e4]"
+                        className="bg-[#F0ECE4] border-r border-[#817B73]/20 shadow-2xl flex flex-col font-sans overflow-y-auto text-[#282421]"
                     >
                         {/* Drawer Header */}
-                        <div className="flex justify-between items-center px-6 py-5 border-b border-[#9a8f80]/15 flex-shrink-0 bg-[#0e0e10]/80">
+                        <div className="flex justify-between items-center px-6 py-5 border-b border-[#817B73]/15 flex-shrink-0 bg-[#302831]/80">
                             <div>
-                                <span className="text-[20px] font-serif tracking-[0.15em] text-[#e8c17b] block font-medium">WearAura</span>
-                                <span className="text-[9px] uppercase tracking-[0.3em] text-[#d1c5b4]/70 block font-sans">Haute Parfumerie</span>
+                                <span className="text-[20px] font-serif tracking-[0.15em] text-[#5B3C58] block font-medium">WearAura</span>
+                                <span className="text-[9px] uppercase tracking-[0.3em] text-[#817B73]/70 block font-sans">Haute Parfumerie</span>
                             </div>
                             <button
                                 onClick={onClose}
                                 aria-label="Close menu"
-                                className="p-2 text-[#d1c5b4]/80 hover:text-[#e8c17b] bg-[#201f21] hover:bg-[#2a2a2c] rounded-full transition-colors"
+                                className="p-2 text-[#817B73]/80 hover:text-[#5B3C58] bg-[#E5DFD7] hover:bg-[#DCD5CC] rounded-full transition-colors"
                             >
                                 <X className="w-4 h-4" />
                             </button>
@@ -87,75 +87,75 @@ function SidebarMenu({
                             <Link 
                                 href="/" 
                                 onClick={onClose} 
-                                className="px-5 py-3.5 text-[12px] uppercase tracking-[0.2em] font-medium text-[#e5e1e4] hover:text-[#e8c17b] hover:bg-[#201f21]/60 rounded transition-all flex items-center justify-between group"
+                                className="px-5 py-3.5 text-[12px] uppercase tracking-[0.2em] font-medium text-[#282421] hover:text-[#5B3C58] hover:bg-[#E5DFD7]/60 rounded transition-all flex items-center justify-between group"
                             >
                                 <span>Home</span>
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#e8c17b] opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#5B3C58] opacity-0 group-hover:opacity-100 transition-opacity"></span>
                             </Link>
                             <Link 
                                 href="/#collection" 
                                 onClick={onClose} 
-                                className="px-5 py-3.5 text-[12px] uppercase tracking-[0.2em] font-medium text-[#e5e1e4] hover:text-[#e8c17b] hover:bg-[#201f21]/60 rounded transition-all flex items-center justify-between group"
+                                className="px-5 py-3.5 text-[12px] uppercase tracking-[0.2em] font-medium text-[#282421] hover:text-[#5B3C58] hover:bg-[#E5DFD7]/60 rounded transition-all flex items-center justify-between group"
                             >
                                 <span>The Collection</span>
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#e8c17b] opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#5B3C58] opacity-0 group-hover:opacity-100 transition-opacity"></span>
                             </Link>
                             <Link 
                                 href="/about" 
                                 onClick={onClose} 
-                                className="px-5 py-3.5 text-[12px] uppercase tracking-[0.2em] font-medium text-[#e5e1e4] hover:text-[#e8c17b] hover:bg-[#201f21]/60 rounded transition-all flex items-center justify-between group"
+                                className="px-5 py-3.5 text-[12px] uppercase tracking-[0.2em] font-medium text-[#282421] hover:text-[#5B3C58] hover:bg-[#E5DFD7]/60 rounded transition-all flex items-center justify-between group"
                             >
                                 <span>The Philosophy</span>
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#e8c17b] opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#5B3C58] opacity-0 group-hover:opacity-100 transition-opacity"></span>
                             </Link>
                             <Link 
                                 href="/contact" 
                                 onClick={onClose} 
-                                className="px-5 py-3.5 text-[12px] uppercase tracking-[0.2em] font-medium text-[#e5e1e4] hover:text-[#e8c17b] hover:bg-[#201f21]/60 rounded transition-all flex items-center justify-between group"
+                                className="px-5 py-3.5 text-[12px] uppercase tracking-[0.2em] font-medium text-[#282421] hover:text-[#5B3C58] hover:bg-[#E5DFD7]/60 rounded transition-all flex items-center justify-between group"
                             >
                                 <span>Concierge</span>
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#e8c17b] opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#5B3C58] opacity-0 group-hover:opacity-100 transition-opacity"></span>
                             </Link>
                             <Link 
                                 href="/wishlist" 
                                 onClick={onClose} 
-                                className="px-5 py-3.5 text-[12px] uppercase tracking-[0.2em] font-medium text-[#e5e1e4] hover:text-[#e8c17b] hover:bg-[#201f21]/60 rounded transition-all flex items-center justify-between group"
+                                className="px-5 py-3.5 text-[12px] uppercase tracking-[0.2em] font-medium text-[#282421] hover:text-[#5B3C58] hover:bg-[#E5DFD7]/60 rounded transition-all flex items-center justify-between group"
                             >
                                 <span>Saved Fragrances</span>
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#e8c17b] opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#5B3C58] opacity-0 group-hover:opacity-100 transition-opacity"></span>
                             </Link>
                         </nav>
 
                         {/* Account Details Footer */}
-                        <div className="border-t border-[#9a8f80]/15 bg-[#0e0e10] px-6 py-6 flex-shrink-0">
+                        <div className="border-t border-[#817B73]/15 bg-[#302831] px-6 py-6 flex-shrink-0">
                             {mounted && (
                                 user ? (
                                     <div className="space-y-3">
-                                        <div className="flex items-center gap-3 pb-3 border-b border-[#2a2a2c]">
-                                            <div className="w-9 h-9 rounded-full bg-[#c9a461] flex items-center justify-center text-[#412d00] text-sm font-serif font-bold flex-shrink-0">
+                                        <div className="flex items-center gap-3 pb-3 border-b border-[#DCD5CC]">
+                                            <div className="w-9 h-9 rounded-full bg-[#4A2E47] flex items-center justify-center text-[#F7F4EE] text-sm font-serif font-bold flex-shrink-0">
                                                 {user.email?.charAt(0).toUpperCase()}
                                             </div>
                                             <div className="overflow-hidden">
-                                                <p className="text-[10px] uppercase tracking-wider text-[#e8c17b]">Client Account</p>
-                                                <p className="text-xs font-medium text-[#e5e1e4] truncate">{user.email}</p>
+                                                <p className="text-[10px] uppercase tracking-wider text-[#5B3C58]">Client Account</p>
+                                                <p className="text-xs font-medium text-[#282421] truncate">{user.email}</p>
                                             </div>
                                         </div>
-                                        <Link href="/account" onClick={onClose} className="flex items-center gap-3 py-2 text-xs uppercase tracking-widest text-[#d1c5b4]/80 hover:text-[#e8c17b] transition-colors">
-                                            <User className="w-4 h-4 text-[#e8c17b]" /> My Profile
+                                        <Link href="/account" onClick={onClose} className="flex items-center gap-3 py-2 text-xs uppercase tracking-widest text-[#817B73]/80 hover:text-[#5B3C58] transition-colors">
+                                            <User className="w-4 h-4 text-[#5B3C58]" /> My Profile
                                         </Link>
-                                        <Link href="/my-orders" onClick={onClose} className="flex items-center gap-3 py-2 text-xs uppercase tracking-widest text-[#d1c5b4]/80 hover:text-[#e8c17b] transition-colors">
-                                            <Package className="w-4 h-4 text-[#e8c17b]" /> Order History
+                                        <Link href="/my-orders" onClick={onClose} className="flex items-center gap-3 py-2 text-xs uppercase tracking-widest text-[#817B73]/80 hover:text-[#5B3C58] transition-colors">
+                                            <Package className="w-4 h-4 text-[#5B3C58]" /> Order History
                                         </Link>
                                         {isAdmin && (
-                                            <Link href="/admin" onClick={onClose} className="flex items-center gap-3 py-2 text-xs uppercase tracking-widest text-[#d1c5b4]/80 hover:text-[#e8c17b] transition-colors">
-                                                <LayoutDashboard className="w-4 h-4 text-[#e8c17b]" /> Boutique Admin
+                                            <Link href="/admin" onClick={onClose} className="flex items-center gap-3 py-2 text-xs uppercase tracking-widest text-[#817B73]/80 hover:text-[#5B3C58] transition-colors">
+                                                <LayoutDashboard className="w-4 h-4 text-[#5B3C58]" /> Boutique Admin
                                             </Link>
                                         )}
                                         <button
                                             onClick={onSignOut}
-                                            className="w-full flex items-center justify-center gap-2 py-3 mt-4 bg-[#201f21] hover:bg-[#2a2a2c] text-[#e5e1e4] border border-[#9a8f80]/20 text-xs uppercase tracking-[0.15em] font-medium rounded transition-colors"
+                                            className="w-full flex items-center justify-center gap-2 py-3 mt-4 bg-[#E5DFD7] hover:bg-[#DCD5CC] text-[#282421] border border-[#817B73]/20 text-xs uppercase tracking-[0.15em] font-medium rounded transition-colors"
                                         >
-                                            <LogOut className="w-4 h-4 text-[#e8c17b]" />
+                                            <LogOut className="w-4 h-4 text-[#5B3C58]" />
                                             Sign Out
                                         </button>
                                     </div>
@@ -164,7 +164,7 @@ function SidebarMenu({
                                         <Link
                                             href="/login"
                                             onClick={onClose}
-                                            className="w-full flex items-center justify-center gap-2 py-3 bg-[#c9a461] hover:bg-[#e8c17b] text-[#412d00] text-xs uppercase tracking-[0.2em] font-semibold rounded transition-colors shadow-lg shadow-[#c9a461]/15"
+                                            className="w-full flex items-center justify-center gap-2 py-3 bg-[#4A2E47] hover:bg-[#5B3C58] text-[#F7F4EE] text-xs uppercase tracking-[0.2em] font-semibold rounded transition-colors shadow-lg shadow-[#4A2E47]/15"
                                         >
                                             <LogIn className="w-4 h-4" />
                                             Sign In
@@ -172,9 +172,9 @@ function SidebarMenu({
                                         <Link
                                             href="/signup"
                                             onClick={onClose}
-                                            className="w-full flex items-center justify-center gap-2 py-3 bg-transparent border border-[#9a8f80]/30 text-[#e5e1e4] hover:bg-[#201f21] text-xs uppercase tracking-[0.2em] font-medium rounded transition-colors"
+                                            className="w-full flex items-center justify-center gap-2 py-3 bg-transparent border border-[#817B73]/30 text-[#282421] hover:bg-[#E5DFD7] text-xs uppercase tracking-[0.2em] font-medium rounded transition-colors"
                                         >
-                                            <UserPlus className="w-4 h-4 text-[#e8c17b]" />
+                                            <UserPlus className="w-4 h-4 text-[#5B3C58]" />
                                             Create Account
                                         </Link>
                                     </div>
@@ -247,8 +247,8 @@ export default function Header() {
         <>
             <header className={`fixed top-0 left-0 right-0 h-16 z-50 transition-all duration-300 ${
                 scrolled 
-                    ? "bg-[#131315]/85 backdrop-blur-xl border-b border-[#9a8f80]/15 shadow-2xl shadow-black/70" 
-                    : "bg-[#131315]/75 backdrop-blur-md border-b border-[#9a8f80]/10"
+                    ? "bg-[#F7F4EE]/85 backdrop-blur-xl border-b border-[#817B73]/15 shadow-2xl shadow-[#282421]/70" 
+                    : "bg-[#F7F4EE]/75 backdrop-blur-md border-b border-[#817B73]/10"
             }`}>
                 <div className="h-full px-6 flex justify-between items-center max-w-[1400px] mx-auto">
                     
@@ -256,7 +256,7 @@ export default function Header() {
                     <div className="flex-1 flex justify-start items-center">
                         <button
                             onClick={() => setIsMenuOpen(true)}
-                            className="p-2 -ml-2 text-[#d1c5b4] hover:text-[#e8c17b] transition-colors focus:outline-none group flex items-center gap-2"
+                            className="p-2 -ml-2 text-[#817B73] hover:text-[#5B3C58] transition-colors focus:outline-none group flex items-center gap-2"
                             aria-label="Toggle menu"
                         >
                             <Menu className="w-5 h-5 stroke-[1.5px] transition-transform duration-300 group-hover:scale-105" />
@@ -266,7 +266,7 @@ export default function Header() {
                     {/* Center: Brand (Stitch label-md Geist tracking-[0.2em] uppercase) */}
                     <div className="flex-1 flex flex-col justify-center items-center text-center">
                         <Link href="/" className="group flex flex-col items-center">
-                            <span className="text-[15px] md:text-[16px] tracking-[0.22em] uppercase text-[#e8c17b] font-bold transition-colors">
+                            <span className="text-[15px] md:text-[16px] tracking-[0.22em] uppercase text-[#5B3C58] font-bold transition-colors">
                                 WEARAURA
                             </span>
                         </Link>
@@ -279,7 +279,7 @@ export default function Header() {
                                 {user ? (
                                     <button
                                         onClick={() => setUserDropdownOpen(v => !v)}
-                                        className="p-2 text-[#d1c5b4] hover:text-[#e8c17b] transition-colors focus:outline-none"
+                                        className="p-2 text-[#817B73] hover:text-[#5B3C58] transition-colors focus:outline-none"
                                         aria-label="Account menu"
                                     >
                                         <User className="w-5 h-5 stroke-[1.5px]" />
@@ -287,7 +287,7 @@ export default function Header() {
                                 ) : (
                                     <Link
                                         href="/login"
-                                        className="p-2 text-[#d1c5b4] hover:text-[#e8c17b] transition-colors focus:outline-none"
+                                        className="p-2 text-[#817B73] hover:text-[#5B3C58] transition-colors focus:outline-none"
                                         aria-label="Login"
                                     >
                                         <User className="w-5 h-5 stroke-[1.5px]" />
@@ -301,27 +301,27 @@ export default function Header() {
                                             animate={{ opacity: 1, y: 0, scale: 1 }}
                                             exit={{ opacity: 0, y: 8, scale: 0.98 }}
                                             transition={{ duration: 0.18 }}
-                                            className="absolute top-12 right-0 w-56 bg-[#16151A] border border-[#9a8f80]/20 shadow-2xl rounded-md py-2 z-50 flex flex-col font-sans"
+                                            className="absolute top-12 right-0 w-56 bg-[#F0ECE4] border border-[#817B73]/20 shadow-2xl rounded-md py-2 z-50 flex flex-col font-sans"
                                         >
-                                            <div className="px-4 py-3 border-b border-[#2a2a2c] mb-1">
-                                                <p className="text-[9px] text-[#e8c17b] uppercase tracking-[0.25em]">Account</p>
-                                                <p className="text-xs font-medium text-[#e5e1e4] truncate mt-0.5">{user.email}</p>
+                                            <div className="px-4 py-3 border-b border-[#DCD5CC] mb-1">
+                                                <p className="text-[9px] text-[#5B3C58] uppercase tracking-[0.25em]">Account</p>
+                                                <p className="text-xs font-medium text-[#282421] truncate mt-0.5">{user.email}</p>
                                             </div>
-                                            <Link href="/account" onClick={() => setUserDropdownOpen(false)} className="px-4 py-2 text-xs uppercase tracking-wider text-[#d1c5b4]/80 hover:text-[#e8c17b] hover:bg-[#201f21] transition-colors">
+                                            <Link href="/account" onClick={() => setUserDropdownOpen(false)} className="px-4 py-2 text-xs uppercase tracking-wider text-[#817B73]/80 hover:text-[#5B3C58] hover:bg-[#E5DFD7] transition-colors">
                                                 My Profile
                                             </Link>
-                                            <Link href="/my-orders" onClick={() => setUserDropdownOpen(false)} className="px-4 py-2 text-xs uppercase tracking-wider text-[#d1c5b4]/80 hover:text-[#e8c17b] hover:bg-[#201f21] transition-colors">
+                                            <Link href="/my-orders" onClick={() => setUserDropdownOpen(false)} className="px-4 py-2 text-xs uppercase tracking-wider text-[#817B73]/80 hover:text-[#5B3C58] hover:bg-[#E5DFD7] transition-colors">
                                                 My Orders
                                             </Link>
-                                            <Link href="/wishlist" onClick={() => setUserDropdownOpen(false)} className="px-4 py-2 text-xs uppercase tracking-wider text-[#d1c5b4]/80 hover:text-[#e8c17b] hover:bg-[#201f21] transition-colors">
+                                            <Link href="/wishlist" onClick={() => setUserDropdownOpen(false)} className="px-4 py-2 text-xs uppercase tracking-wider text-[#817B73]/80 hover:text-[#5B3C58] hover:bg-[#E5DFD7] transition-colors">
                                                 Saved Fragrances
                                             </Link>
                                             {isAdmin && (
-                                                <Link href="/admin" onClick={() => setUserDropdownOpen(false)} className="px-4 py-2 text-xs uppercase tracking-wider text-[#d1c5b4]/80 hover:text-[#e8c17b] hover:bg-[#201f21] transition-colors">
+                                                <Link href="/admin" onClick={() => setUserDropdownOpen(false)} className="px-4 py-2 text-xs uppercase tracking-wider text-[#817B73]/80 hover:text-[#5B3C58] hover:bg-[#E5DFD7] transition-colors">
                                                     Admin Dashboard
                                                 </Link>
                                             )}
-                                            <button onClick={handleSignOut} className="px-4 py-2 text-xs text-left uppercase tracking-wider text-[#e8c17b] hover:bg-[#201f21] transition-colors border-t border-[#2a2a2c] mt-1 pt-2.5">
+                                            <button onClick={handleSignOut} className="px-4 py-2 text-xs text-left uppercase tracking-wider text-[#5B3C58] hover:bg-[#E5DFD7] transition-colors border-t border-[#DCD5CC] mt-1 pt-2.5">
                                                 Log Out
                                             </button>
                                         </motion.div>
@@ -330,7 +330,7 @@ export default function Header() {
                             </div>
                         )}
 
-                        <Link href="/cart" className="p-2 text-[#d1c5b4] hover:text-[#e8c17b] transition-colors relative focus:outline-none" aria-label="Shopping Cart">
+                        <Link href="/cart" className="p-2 text-[#817B73] hover:text-[#5B3C58] transition-colors relative focus:outline-none" aria-label="Shopping Cart">
                             <ShoppingBag className="w-5 h-5 stroke-[1.5px]" />
                             <AnimatePresence>
                                 {mounted && cartCount > 0 && (
@@ -338,7 +338,7 @@ export default function Header() {
                                         initial={{ scale: 0 }}
                                         animate={{ scale: 1 }}
                                         exit={{ scale: 0 }}
-                                        className="absolute top-1 right-0 bg-[#e8c17b] text-[#412d00] text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full ring-2 ring-[#131315]"
+                                        className="absolute top-1 right-0 bg-[#5B3C58] text-[#F7F4EE] text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full ring-2 ring-[#F7F4EE]"
                                     >
                                         {cartCount}
                                     </motion.span>

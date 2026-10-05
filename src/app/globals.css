@@ -7,105 +7,108 @@
 }
 
 :root {
-  /* Stitch Design System: Aura Radiant Intelligence */
-  --surface: #131315;
-  --surface-dim: #131315;
-  --surface-bright: #39393b;
-  --surface-container-lowest: #0e0e10;
-  --surface-container-low: #1c1b1d;
-  --surface-container: #201f21;
-  --surface-container-high: #2a2a2c;
-  --surface-container-highest: #353437;
+  /* WearAura Quiet Luxury — Warm Ivory & Plum Palette */
+  --surface: #F7F4EE;
+  --surface-dim: #F7F4EE;
+  --surface-bright: #FFFFFF;
+  --surface-container-lowest: #E9E1DC;
+  --surface-container-low: #F0ECE4;
+  --surface-container: #EDE8E0;
+  --surface-container-high: #E5DFD7;
+  --surface-container-highest: #DCD5CC;
   
-  --on-surface: #e5e1e4;
-  --on-surface-variant: #d1c5b4;
-  --inverse-surface: #e5e1e4;
-  --inverse-on-surface: #313032;
+  --on-surface: #282421;
+  --on-surface-variant: #817B73;
+  --inverse-surface: #302831;
+  --inverse-on-surface: #F7F4EE;
   
-  --outline: #9a8f80;
-  --outline-variant: #4e4639;
+  --outline: #817B73;
+  --outline-variant: rgba(40, 36, 33, 0.16);
   
-  --primary: #e8c17b;
-  --on-primary: #412d00;
-  --primary-container: #c9a461;
-  --on-primary-container: #533a00;
-  --inverse-primary: #775a1e;
+  --primary: #5B3C58;
+  --on-primary: #F7F4EE;
+  --primary-container: #7A5577;
+  --on-primary-container: #F7F4EE;
+  --inverse-primary: #D5BCC6;
   
-  --secondary: #c0c1ff;
-  --secondary-container: #3131c0;
-  --on-secondary-container: #b0b2ff;
+  --secondary: #817B73;
+  --secondary-container: #E9E1DC;
+  --on-secondary-container: #282421;
   
-  --tertiary: #3cddc7;
-  --error: #ffb4ab;
+  --tertiary: #A6B9AE;
+  --error: #C53030;
   
-  --background: #131315;
-  --on-background: #e5e1e4;
+  --background: #F7F4EE;
+  --on-background: #282421;
   
-  --obsidian-light: #16151A;
-  --parchment: #F2EFE9;
-  --smoke-gold: #8C8880;
-  --electric-indigo: #6366F1;
-  --soft-teal: #2DD4BF;
+  --obsidian-light: #F0ECE4;
+  --parchment: #F7F4EE;
+  --smoke-gold: #817B73;
+  --electric-indigo: #5B3C58;
+  --soft-teal: #A6B9AE;
   
   /* Legacy mapping aliases */
-  --bg-primary: #131315;
-  --bg-secondary: #16151A;
-  --bg-elevated: #201f21;
-  --text-primary: #e5e1e4;
-  --text-muted: #d1c5b4;
-  --accent-gold: #e8c17b;
-  --accent-gold-light: #ffdea7;
-  --accent-gold-dark: #c9a461;
+  --bg-primary: #F7F4EE;
+  --bg-secondary: #F0ECE4;
+  --bg-elevated: #EDE8E0;
+  --text-primary: #282421;
+  --text-muted: #817B73;
+  --accent-gold: #5B3C58;
+  --accent-gold-light: #7A5577;
+  --accent-gold-dark: #4A2E47;
+
+  /* Footer dark bg */
+  --footer-bg: #302831;
 }
 
 body {
-  background-color: #131315;
-  color: #e5e1e4;
+  background-color: #F7F4EE;
+  color: #282421;
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
 }
 
 ::selection {
-  background-color: rgba(201, 164, 97, 0.35);
-  color: #e5e1e4;
+  background-color: rgba(91, 60, 88, 0.2);
+  color: #282421;
 }
 
 /* Glassmorphic Panels & Cards */
 .glass-panel, .glass-card {
-  background: rgba(22, 21, 26, 0.8);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(140, 136, 128, 0.2);
+  border: 1px solid rgba(40, 36, 33, 0.1);
 }
 
 /* Radiant Aura Glows */
 .aura-glow {
-  box-shadow: 0 0 40px rgba(201, 164, 97, 0.15);
+  box-shadow: 0 0 40px rgba(91, 60, 88, 0.12);
   transition: box-shadow 0.4s ease, transform 0.4s ease;
 }
 
 .aura-glow:hover {
-  box-shadow: 0 0 60px rgba(201, 164, 97, 0.28);
+  box-shadow: 0 0 60px rgba(91, 60, 88, 0.2);
 }
 
 .aura-glow-subtle {
-  box-shadow: 0 0 30px -5px rgba(232, 193, 123, 0.12);
+  box-shadow: 0 0 30px -5px rgba(91, 60, 88, 0.08);
 }
 
 /* Form Inputs (Minimal luxury underline) */
 .form-input {
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(140, 136, 128, 0.3);
+  border-bottom: 1px solid rgba(40, 36, 33, 0.2);
   padding: 0.75rem 0;
-  color: #e5e1e4;
+  color: #282421;
   width: 100%;
   transition: all 0.3s ease;
   outline: none;
 }
 
 .form-input:focus {
-  border-bottom-color: #e8c17b;
+  border-bottom-color: #5B3C58;
   box-shadow: none;
 }
 
@@ -116,16 +119,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #131315;
+  background: #F7F4EE;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2a2a2c;
+  background: #DCD5CC;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #e8c17b;
+  background: #5B3C58;
 }
 
 /* Signature Scent Aura Animation */
@@ -141,14 +144,14 @@ body {
 }
 
 .scent-aura {
-  background: radial-gradient(ellipse 65% 65% at 50% 50%, rgba(107, 66, 38, 0.45) 0%, rgba(232, 193, 123, 0.14) 45%, rgba(19, 19, 21, 0) 75%);
+  background: radial-gradient(ellipse 65% 65% at 50% 50%, rgba(91, 60, 88, 0.15) 0%, rgba(91, 60, 88, 0.05) 45%, rgba(247, 244, 238, 0) 75%);
   animation: aura-breathe 8s ease-in-out infinite;
   pointer-events: none;
 }
 
-/* Metallic Gold Gradient & Shimmer */
+/* Metallic Plum Gradient & Shimmer */
 .gold-text-gradient {
-  background: linear-gradient(135deg, #F2EFE9 0%, #e8c17b 60%, #ffdea7 100%);
+  background: linear-gradient(135deg, #5B3C58 0%, #7A5577 60%, #D5BCC6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -157,7 +160,7 @@ body {
 .aura-divider {
   position: relative;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(232, 193, 123, 0.25) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(91, 60, 88, 0.25) 50%, transparent 100%);
 }
 
 .aura-divider::after {
@@ -169,13 +172,13 @@ body {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #e8c17b;
-  box-shadow: 0 0 10px #e8c17b;
+  background: #5B3C58;
+  box-shadow: 0 0 10px rgba(91, 60, 88, 0.4);
 }
 
 /* Accessible focus ring */
 :focus-visible {
-  outline: 2px solid #e8c17b;
+  outline: 2px solid #5B3C58;
   outline-offset: 2px;
 }
 
@@ -187,4 +190,3 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
-
